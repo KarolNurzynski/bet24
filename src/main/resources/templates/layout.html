@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<body>
+
+<table>
+    <tr>
+        <td><a href="/">Home</a></td>
+        <td><a href="/project/show/all">Projects</a></td>
+        <td><a href="/task/show/all">Tasks</a></td>
+        <td><a href="/user/show/all">Users</a></td>
+        <td><a href="/priority/show/all">Priorities</a></td>
+        <td><a href="/status/show/all">Status</a></td>
+        <td sec:authorize="isAuthenticated()">
+            <span sec:authentication="name"></span>
+        </td>
+    </tr>
+</table>
+
+<div layout:fragment="content">
+    //Here will be the content of a page
+</div>
+
+</body>
+</html>

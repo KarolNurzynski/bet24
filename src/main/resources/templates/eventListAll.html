@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Show events: </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <h1>All events: </h1>
+
+    <table>
+        <th>
+            <td>Name</td>
+            <td>DateTime</td>
+            <td>Sport</td>
+            <td>Region</td>
+            <td>League</td>
+            <td>Teams</td>
+            <td>Bet Offers</td>
+        </th>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}"/>
+            <td th:text="${event.name}"/>
+            <td th:text="${event.localDateTime}"/>
+            <td th:text="${event.sport.name}"/>
+            <td th:text="${event.region.name}"/>
+            <td th:text="${event.league.name}"/>
+            <td>
+                <ul>
+                    <li th:each="team : ${event.teams}">
+                        <p th:text="|${team.id}: ${team.name}|"></p>
+                        <a th:href="@{'/team/show/'+${team.id}}">team</a>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="betOffer : ${event.betOffers}">
+                        <p th:text="|${betOffer.id}: ${betOffer.betOfferType.name}|"></p>
+                        <a th:href="@{'/bet/add/'+${betOffer.id}}">Add bet</a>
+                    </li>
+                </ul>
+            </td>
+
+        </tr>
+
+    </table>
+
+</section>
+</body>
+</html>

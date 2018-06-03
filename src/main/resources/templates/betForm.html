@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Add bet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<section layout:fragment="content">
+
+    <form th:object="${bet}" method="post">
+
+        <p><input th:field="*{stake}" placeholder="stake">stake</p>
+        <p th:if="${#fields.hasErrors('stake')}" th:errors="*{stake}">Incorrect stake</p>
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+</section>
+</body>
+</html>
