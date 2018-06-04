@@ -2,7 +2,7 @@ package pl.coderslab.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.coderslab.entity.User;
-import pl.coderslab.serviceInterface.UserServiceInterface;
+import pl.coderslab.service.UserService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueNameValidator implements ConstraintValidator<UniqueName, String> {
 
     @Autowired
-    UserServiceInterface userServiceInterface;
+    UserService userService;
 
         @Override
         public void initialize(UniqueName constraintAnnotation) {
@@ -18,7 +18,7 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName, Stri
         @Override
         public boolean isValid(String value, ConstraintValidatorContext context) {
                 try {
-                    User user = (userServiceInterface.findByUserName(value));
+                    User user = (userService.findByUserName(value));
                     return false;
                 } catch (NullPointerException e) {
                     return true;

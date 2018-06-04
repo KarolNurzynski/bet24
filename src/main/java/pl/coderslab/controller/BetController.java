@@ -70,14 +70,14 @@ public class BetController {
         return "redirect:/home";
     }
 
-    @GetMapping("/add/cartOfBets")
-    public String addcartOfBets(HttpSession sess){
-        List<Bet> cartOfBets = (List<Bet>) sess.getAttribute("cartOfBets");
-        model.addAttribute("bet", new Bet());
-        model.addAttribute("betOffer",
-                betOfferService.findBetOfferById(betOffer_id));
-        return "betForm";
-    }
+//    @GetMapping("/add/cartOfBets")
+//    public String addcartOfBets(HttpSession sess){
+//        List<Bet> cartOfBets = (List<Bet>) sess.getAttribute("cartOfBets");
+//        model.addAttribute("bet", new Bet());
+//        model.addAttribute("betOffer",
+//                betOfferService.findBetOfferById(betOffer_id));
+//        return "betForm";
+//    }
 
     @GetMapping("/show/all")
     public String showAllBets(Model model) {

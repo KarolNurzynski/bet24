@@ -1,43 +1,21 @@
 package pl.coderslab.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Account;
-import pl.coderslab.repository.AccountRepository;
-import pl.coderslab.serviceInterface.AccountServiceInterface;
 
 import java.util.List;
 
 @Service
-public class AccountService implements AccountServiceInterface {
+public interface AccountService {
 
-    AccountRepository accountRepository;
+    public List<Account> findAllAccounts();
 
-    @Autowired
-    AccountService(AccountRepository accountRepository) {
-        this.accountRepository=accountRepository;
-    }
+    public Account findAccountById(Long id);
 
-    public List<Account> findAllAccounts() {
-        return accountRepository.findAll();
-    }
+    public Account saveAccount(Account account);
 
-    public Account findAccountById(Long id) {
-        return accountRepository.findById(id).orElseGet(null);
-    }
+    public Account editAccount(Account account);
 
-    public Account saveAccount(Account account) {
-        return accountRepository.save(account);
-    }
-
-    public Account editAccount(Account account) {
-        return accountRepository.save(account);
-    }
-
-    public void deleteAccount(Long id) {
-        accountRepository.deleteById(id);
-    }
-
-
+    public void deleteAccount(Long id);
 
 }
