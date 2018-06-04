@@ -21,8 +21,8 @@ public class Operation {
 
     private LocalDateTime date;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }

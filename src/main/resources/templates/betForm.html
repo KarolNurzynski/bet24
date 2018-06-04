@@ -9,7 +9,7 @@
 <body>
 <section layout:fragment="content">
 
-    <form th:object="${bet}" method="post">
+    <form th:action="@{/bet/add/{betOffer_id}(betOffer_id=${betOffer.id})}" th:object="${bet}" method="post">
 
         <p><input th:field="*{stake}" placeholder="stake">stake</p>
         <p th:if="${#fields.hasErrors('stake')}" th:errors="*{stake}">Incorrect stake</p>

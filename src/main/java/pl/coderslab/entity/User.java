@@ -16,7 +16,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String username;    // =email
 
     private String password;
 
@@ -27,10 +27,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Bet> bets;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<Operation> operations;
+    @OneToMany(mappedBy = "user")
+    private List<Bet> bets;
+
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }

@@ -29,4 +29,8 @@ public class BetOffer {
     @OneToMany(mappedBy = "betOffer")
     private List<Bet> bets;
 
+    @ManyToOne
+    @JoinColumn(name = "betOfferType_id")
+    private BetOfferType betOfferType;
+
 }

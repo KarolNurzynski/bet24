@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorator="layout">
 <head>
-    <title>Bet24 - home</title>
+    <title>User account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         table {
@@ -17,87 +17,24 @@
     </style>
 </head>
 <body>
-
 <section layout:fragment="content">
 
-    <span sec:authorize="isAuthenticated()">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Log out"/>
-        </form>
-    </span>
+    <h2>Add money:</h2>
 
-    <h1>Welcome on Bet24</h1>
-
-    <h2>List of events:</h2>
-
-    <table>
-        <th>
-        <td>Team A</td>
-        <td>Team B</td>
-        </th>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}"/>
-            <td th:text="${event.teamA}"/>
-            <td th:text="${event.teamB}"/>
-
-
-        </tr>
-
-    </table>
-
-    <h2>List of offers:</h2>
-
-    <table>
-        <th>
-        <td>Type</td>
-        <td>Odds</td>
-        </th>
-        <tr th:each="betOffer : ${betOffers}">
-            <td th:text="${betOffer.id}"/>
-            <td th:text="${betOffer.betOfferType.name}"/>
-            <td th:text="${betOffer.odds}"/>
-            <td><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
-        </tr>
-
-    </table>
-
-    <h2>Your cart:</h2>
-
-    <table>
-        <th>
-        <td>Game</td>
-        <td>Bet type</td>
-        <td>Odds</td>
-        <td>Stake</td>
-        </th>
-        <tr th:each="bet,iter : ${session.cartOfBets}">
-            <td th:text="${iter.count}"/>
-            <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
-            <td th:text="${bet.betOffer.betOfferType.name}"/>
-            <td th:text="${bet.betOffer.odds}"/>
-            <td th:text="${bet.stake}"/>
-        </tr>
-
-    </table>
-
-    <form th:action="@{/bet/add/{betOffer_id}(betOffer_id=${betOffer.id})}" th:object="${bet}" method="post">
-
-        <p><input th:field="*{stake}" placeholder="stake">stake</p>
-        <p th:if="${#fields.hasErrors('stake')}" th:errors="*{stake}">Incorrect stake</p>
-
-        <p><input type="submit" value="submit"></p>
-
+    <form th:action="@{/}" method="post">
+        <div><label> User Name : <input type="text" name="username"/> </label></div>
+        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Sign In"/></div>
     </form>
 
 
-    <!--<form th:action="@{/betOffer/add}" th:object="${betOffer}" method="post">-->
+    <h2>List of events:</h2>
 
-        <!--<p><input th:field="*{stake}" placeholder="stake">stake</p>-->
-        <!--<p th:if="${#fields.hasErrors('stake')}" th:errors="*{stake}">Incorrect stake</p>-->
 
-        <!--<p><input type="submit" value="submit"></p>-->
 
-    <!--</form>-->
+
+
+    <h2>List of offers:</h2>
 
 
 

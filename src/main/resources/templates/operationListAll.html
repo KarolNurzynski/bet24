@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Show events: </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <h1>Add funds: </h1>
+
+    <form th:action="@{/operation/add}" th:object="${operation}" method="post">
+
+        <p><input th:field="*{value}" placeholder="value">value</p>
+        <p th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Incorrect value</p>
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+    <h1>All operations: </h1>
+
+    <table>
+        <th>
+            <td>Description</td>
+            <td>Value</td>
+            <td>Date</td>
+        </th>
+        <tr th:each="operation : ${operations}">
+            <td th:text="${operation.id}"/>
+            <td th:text="${operation.description}"/>
+            <td th:text="${operation.value}"/>
+            <td th:text="${operation.date}"/>
+        </tr>
+
+    </table>
+
+</section>
+</body>
+</html>

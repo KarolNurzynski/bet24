@@ -4,8 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import pl.coderslab.entity.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.entity.Bet;
+import pl.coderslab.entity.BetOffer;
+import pl.coderslab.entity.BetOfferType;
+import pl.coderslab.entity.Event;
 import pl.coderslab.service.*;
 
 import javax.servlet.http.HttpSession;
@@ -14,8 +20,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-@RequestMapping("/bet")
-public class BetController {
+@RequestMapping("/betOffer")
+public class BetOfferController {
 
     @Autowired
     BetService betService;
@@ -32,65 +38,33 @@ public class BetController {
     @Autowired
     EventService eventService;
 
-    @GetMapping("/add/{betOffer_id}")
-    public String addBet(@PathVariable Long betOffer_id,
-                         Model model){
-        model.addAttribute("bet", new Bet());
-        model.addAttribute("betOffer",
-                betOfferService.findBetOfferById(betOffer_id));
-        return "betForm";
+    @GetMapping("/add")
+    public String addBet(Model model){
+        model.addAttribute("betOffer", new BetOffer());
+        return "redirect:/";
     }
 
-    @PostMapping("/add/{betOffer_id}")
-    public String addBet(@ModelAttribute Bet bet,
-                         @PathVariable Long betOffer_id,
-                         HttpSession sess){
+    @PostMapping("/add")
+    public String addBetOffer(@ModelAttribute BetOffer betOffer){
 //        if (result.hasErrors()) {
-//            return "betForm";
+//            return "redirect:/";
 //        }
-
-        Long user_id = (Long) sess.getAttribute("user_id");
-        List<Bet> cart = (List<Bet>) sess.getAttribute("cartOfBets");
-
-        BetOffer betOffer= betOfferService.findBetOfferById(betOffer_id);
-        Event event = betOffer.getEvent();
-        User user = userService.findUserById(user_id);
-
-        bet.setBetOffer(betOffer);
-        bet.setUser(user);
-        bet.setEvent(event);
-        bet.setTimeMade(LocalDateTime.now());
-
-        cart.add(bet);
-
-        List<Bet> cart2 = (List<Bet>) sess.getAttribute("cartOfBets");
-        System.out.println("===========");
-        System.out.println(cart2.get(0).getStake());
-//        betService.saveBet(bet);
-        return "redirect:/home";
-    }
-
-    @GetMapping("/add/cartOfBets")
-    public String addcartOfBets(HttpSession sess){
-        List<Bet> cartOfBets = (List<Bet>) sess.getAttribute("cartOfBets");
-        model.addAttribute("bet", new Bet());
-        model.addAttribute("betOffer",
-                betOfferService.findBetOfferById(betOffer_id));
-        return "betForm";
+        betOffer.setPublished(LocalDateTime.now());
+        betOfferService.saveBetOffer(betOffer);
+        return "redirect:/";
     }
 
     @GetMapping("/show/all")
     public String showAllBets(Model model) {
-        return "betListAll";
+        return "betOfferListAll";
     }
-
-    @GetMapping("/show/{bet_id")
-    public String showBet(@PathVariable Long bet_id, Model model) {
-        model.addAttribute(betService.findBetById(bet_id));
-        return "betShow";
-    }
-
-
+//
+//    @GetMapping("/show/{bet_id")
+//    public String showBet(@PathVariable Long bet_id, Model model) {
+//        model.addAttribute(betService.findBetById(bet_id));
+//        return "betShow";
+//    }
+//
 //    @GetMapping("/edit/{bet_id}")
 //    public String editBet(@PathVariable Long bet_id, Model model) {
 //        Bet bet = betService.findBetById(bet_id);
@@ -116,10 +90,15 @@ public class BetController {
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////
 
+//    @ModelAttribute("users")
+//    public List<User> users() {
+//        return userServiceInterface.findAllUsers();
+//    }
+//
     @ModelAttribute("bets")
     public List<Bet> bets() {
-        return betService.findAllBets();
-    }
+    return betService.findAllBets();
+}
 
     @ModelAttribute("events")
     public List<Event> allEvents() {
@@ -135,6 +114,5 @@ public class BetController {
     public List<BetOffer> allBetOffers() {
         return betOfferService.findAllBetOffers();
     }
-
 
 }

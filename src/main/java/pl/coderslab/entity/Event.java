@@ -28,7 +28,7 @@ public class Event {
 
     private int strengthB;
 
-    private LocalDateTime start;
+    private LocalDateTime startDate;
 
     private LocalTime timeLeft = LocalTime.of(1,30,0);
 

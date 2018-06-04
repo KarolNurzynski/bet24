@@ -18,18 +18,20 @@
 <body>
 <section layout:fragment="content">
 
-    <h1>All events: </h1>
+    <h1>All bet offers: </h1>
 
     <table>
         <th>
-            <td>Team A</td>
-            <td>Team B</td>
-        </th>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}"/>
-            <td th:text="${event.teamA}"/>
-            <td th:text="${event.teamB}"/>
+            <td>Type</td>
+            <td>Odds</td>
+            <td>Place bet</td>
 
+        </th>
+        <tr th:each="betOffer : ${betOffers}">
+            <td th:text="${betOffer.id}"/>
+            <td th:text="${betOffer.betOfferType.name}"/>
+            <td th:text="${betOffer.odds}"/>
+            <td><a th:href="@{'/bet/add/'+${betOffer.id}}">bet</a></td>
         </tr>
 
     </table>
