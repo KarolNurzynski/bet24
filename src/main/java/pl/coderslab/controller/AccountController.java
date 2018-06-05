@@ -46,14 +46,14 @@ public class AccountController {
     public String addAccount(@Valid @ModelAttribute Account account,
                              BindingResult result,
                              HttpSession sess){
-        if (result.hasErrors()) {
-            return "accountForm";
-        }
-        Long user_id = (Long) sess.getAttribute("user_id");
-
-        User user = userService.findUserById(user_id);
-        user.setAccount(account);
-        userService.editUser(user);
+//        if (result.hasErrors()) {
+//            return "accountForm";
+//        }
+//        Long user_id = (Long) sess.getAttribute("user_id");
+//
+//        User user = userService.findUserById(user_id);
+//        user.setAccounts(account);
+//        userService.editUser(user);
         return "redirect:/home";
     }
 

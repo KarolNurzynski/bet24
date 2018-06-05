@@ -7,14 +7,21 @@
 <table>
     <tr>
         <td><a href="/home">Home</a></td>
-        <td><a href="/project/show/all">Projects</a></td>
-        <td><a href="/task/show/all">Tasks</a></td>
-        <td><a href="/user/show/all">Users</a></td>
-        <td><a href="/priority/show/all">Priorities</a></td>
-        <td><a href="/status/show/all">Status</a></td>
-        <td sec:authorize="isAuthenticated()">
-            <span sec:authentication="name"></span>
+
+        <td th:if="${session.user_id != null}">
+            <a th:href="@{/operation/add}">Wallet</a>
         </td>
+
+        <td th:if="${session.user_id != null}">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Log out"/>
+            </form>
+        </td>
+
+        <td th:if="${session.user_id != null}" th:text="|User: ${session.user_id}|">
+
+        </td>
+
     </tr>
 </table>
 

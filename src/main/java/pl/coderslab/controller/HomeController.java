@@ -5,12 +5,14 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.entity.*;
 import pl.coderslab.service.*;
+import pl.coderslab.validation.ValidUsernamePassword;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -40,28 +42,34 @@ public class HomeController {
     //if not logged in, redirected to address "/login" (By Spring Sec); login url redirects to "/" if logged in with success
     @GetMapping("/")
     public String home() {
-        return "homeView";
+        return "redirect:/home";//nie dziala - Spring to blokuje
     }
 
     @GetMapping("/home")
-    public String homeView() {
+    public String homeView(Model model) {
+        model.addAttribute("user", new User());
         return "homeView";
     }
 
     //at this point I add to session user_id and a cart (to store bets)
     @PostMapping("/home")
-    public String login(@ModelAttribute User user,
+    public String login(@Validated({ValidUsernamePassword.class}) @ModelAttribute User user,
+                        BindingResult result,
                         HttpSession sess,
                         Model model) {
-//        if (result.hasErrors()) {
-//            return "loginPage";
-//        }
-        User userFromDB = userService.findByUserName(user.getUsername());
-        if ((userFromDB == null) || (!BCrypt.checkpw(user.getPassword(), userFromDB.getPassword()))) {
+        System.out.println("===============");
+        if (result.hasErrors()) {
+            return "login";
+        }
+        System.out.println("===============");
+
+        User userFromDBByUsername = userService.findUserByUsername(user.getUsername());
+        if ((userFromDBByUsername == null) ||
+                (!BCrypt.checkpw(user.getPassword(), userFromDBByUsername.getPassword()))) {
             model.addAttribute("loginError",1);
             return "login";
         } else {
-            Long user_id = userFromDB.getId();
+            Long user_id = userFromDBByUsername.getId();
 
             List<Bet> cartOfBets = new ArrayList<>();
             sess.setAttribute("user_id",user_id);

@@ -20,130 +20,163 @@
 
 <section layout:fragment="content">
 
-    <div th:if="${session.user_id != null}" th:text="|User: ${session.user_id}|"></div>
-
-    <p><a th:href="@{/operation/add}">Wallet</a></p>
-
-    <span sec:authorize="isAuthenticated()">
-
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Log out"/>
-        </form>
-
-    </span>
-
     <h1>Welcome on Bet24</h1>
 
-    <h2>List of events:</h2>
-
-    <table>
-        <th>
-        <td>Team A</td>
-        <td>Team B</td>
-        </th>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}"/>
-            <td th:text="${event.teamA}"/>
-            <td th:text="${event.teamB}"/>
 
 
-        </tr>
-
-    </table>
-
-    <h2>List of offers:</h2>
-
-    <table>
-        <th>
-        <td>Type</td>
-        <td>Odds</td>
-        <td>Add to cart</td>
-        </th>
-        <tr th:each="betOffer : ${betOffers}">
-            <td th:text="${betOffer.id}"/>
-            <td th:text="${betOffer.betOfferType.name}"/>
-            <td th:text="${betOffer.odds}"/>
-            <td><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
-        </tr>
-
-    </table>
+    <!--LOGIN PART - VIEWED ONLY WHEN USER NOT LOGGED IN-->
 
 
-    <h2>Your cart:</h2>
+    <div th:if="${session.user_id == null}">
 
-    <div th:if="${not #lists.isEmpty(session.cartOfBets)}">
-        <table >
-            <th>
-            <td>Game</td>
-            <td>Bet type</td>
-            <td>Odds</td>
-            <td>Stake</td>
-            </th>
-            <tr th:each="bet,iter : ${session.cartOfBets}">
-                <td th:text="${iter.count}"/>
-                <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
-                <td th:text="${bet.betOffer.betOfferType.name}"/>
-                <td th:text="${bet.betOffer.odds}"/>
-                <td th:text="${bet.stake}"/>
-            </tr>
-        </table>
+        <h2>Log in:</h2>
 
-        <p><a th:href="@{/bet/add/cartOfBets}">Go to payment</a></p>
+        <form th:action="@{/home}" th:object="${user}" method="post">
+
+            <p><input th:field="*{username}" placeholder="username">username</p>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect username</p>
+
+            <p><input th:field="*{password}" placeholder="password">password</p>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</p>
+
+            <span th:if="${loginError==1}">Incorrect email of password</span>
+
+            <p><input type="submit" value="submit"></p>
+
+        </form>
+
+        <a href="/user/add">Register here</a>
+
+        <p>------------------------------------------------</p>
+
+    </div>
+
+
+    <div>
+        <h2>List of events:</h2>
+
+        <div th:if="${ #lists.isEmpty(events)}">
+            <p>No events available..</p>
+        </div>
+
+
+        <div th:if="${not #lists.isEmpty(events)}">
+
+            <table>
+                <th>
+                <td>Team A</td>
+                <td>Team B</td>
+                </th>
+                <tr th:each="event : ${events}">
+                    <td th:text="${event.id}"/>
+                    <td th:text="${event.teamA}"/>
+                    <td th:text="${event.teamB}"/>
+
+
+                </tr>
+
+            </table>
+
+        </div>
+        <p>------------------------------------------------</p>
+
     </div>
 
 
 
+    <div>
+
+        <h2>List of offers:</h2>
+
+        <div th:if="${ #lists.isEmpty(betOffers)}">
+            <p>No offers available..</p>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(betOffers)}">
+
+            <table>
+                <th>
+                <td>Type</td>
+                <td>Odds</td>
+                <td>Add to cart</td>
+                </th>
+                <tr th:each="betOffer : ${betOffers}">
+                    <td th:text="${betOffer.id}"/>
+                    <td th:text="${betOffer.betOfferType.name}"/>
+                    <td th:text="${betOffer.odds}"/>
+                    <td><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <p>------------------------------------------------</p>
+
+    </div>
+
+
+    <div th:if="${session.user_id != null}">
+
+        <h2>Your cart:</h2>
+
+        <div th:if="${ #lists.isEmpty(session.cartOfBets)}">
+            <p>Cart is empty</p>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(session.cartOfBets)}">
+            <table >
+                <th>
+                <td>Game</td>
+                <td>Bet type</td>
+                <td>Odds</td>
+                <td>Stake</td>
+                </th>
+                <tr th:each="bet,iter : ${session.cartOfBets}">
+                    <td th:text="${iter.count}"/>
+                    <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
+                    <td th:text="${bet.betOffer.betOfferType.name}"/>
+                    <td th:text="${bet.betOffer.odds}"/>
+                    <td th:text="${bet.stake}"/>
+                </tr>
+            </table>
+
+            <p><a th:href="@{/bet/add/cartOfBets}">Go to payment</a></p>
+        </div>
+
+        <p>------------------------------------------------</p>
+
+    </div>
+
+        <!--<div th:if="${session.user_id != null}">-->
+        <!--&lt;!&ndash;<div th:if="${ #lists.isEmpty(session.cartOfBets)}" th:text="No elements in the cart">&ndash;&gt;-->
+
+        <!--<h2>List of your bets:</h2>-->
+
+        <!--&lt;!&ndash;<div th:if="${not #lists.isEmpty(session.cartOfBets)}">&ndash;&gt;-->
+        <!--&lt;!&ndash;<table >&ndash;&gt;-->
+        <!--&lt;!&ndash;<th>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>Game</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>Bet type</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>Odds</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>Stake</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;</th>&ndash;&gt;-->
+        <!--&lt;!&ndash;<tr th:each="bet,iter : ${session.cartOfBets}">&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="${iter.count}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="${bet.betOffer.betOfferType.name}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="${bet.betOffer.odds}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="${bet.stake}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+        <!--&lt;!&ndash;</table>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<p><a th:href="@{/bet/add/cartOfBets}">Go to payment</a></p>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+        <!--</div>-->
 
 
 
-    <!--<table>-->
-        <!--<th>-->
-        <!--<td>Id</td>-->
-        <!--<td>Match</td>-->
-        <!--<td>Date</td>-->
-        <!--<td>Odds</td>-->
-        <!--<td>ProjectId</td>-->
-        <!--<td>Users</td>-->
-        <!--<td>Active status</td>-->
-        <!--<td>Tasks</td>-->
-        <!--<td>Edit</td>-->
-        <!--<td>Delete</td>-->
-        <!--</th>-->
-        <!--<tr th:each="betOffer : ${betOffers}">-->
-            <!--<td th:text="${betOffer.id}"/>-->
-            <!--<td th:text="|${betOffer.event.teamA} vs ${betOffer.event.teamB}|"/>-->
-            <!--<td th:text="${betOffer.event.start}"/>-->
-            <!--<td th:text="${betOffer.odds}"/>-->
-            <!--<td th:text="${betOffer.odds}"/>-->
-
-
-
-            <!--<td>-->
-                <!--<ul>-->
-                    <!--<li th:each="user : ${project.users}">-->
-                        <!--<p th:text="|User no: ${user.id}; Lastname: ${user.lastName}|"></p>-->
-                        <!--<a th:href="@{'/task/edit/'+${user.id}}">edit user</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</td>-->
-            <!--<td th:text="${project.activeStatus}"/>-->
-            <!--<td>-->
-                <!--<ul>-->
-                    <!--<li th:each="task : ${project.tasks}">-->
-                        <!--<p th:text="|Task no: ${task.id}; Topic: ${task.topic}|"></p>-->
-                        <!--<a th:href="@{'/task/edit/'+${task.id}}">edit task</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</td>-->
-            <!--<td><a th:href="@{'/project/edit/'+${project.id}}">edit project</a></td>-->
-            <!--<td><a th:href="@{'/project/delete/'+${project.id}}">delete project</a></td>-->
-
-
-        <!--</tr>-->
-
-    <!--</table>-->
-
-    <h2>List of your bets:</h2>
 
 </section>
 </body>

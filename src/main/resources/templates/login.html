@@ -28,6 +28,8 @@
         <p><input th:field="*{password}" placeholder="password">password</p>
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</p>
 
+        <span th:if="${loginError==1}">Incorrect email of password</span>
+
         <p><input type="submit" value="submit"></p>
 
     </form>

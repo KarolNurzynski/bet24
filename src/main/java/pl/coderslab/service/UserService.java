@@ -8,7 +8,9 @@ import java.util.List;
 @Service
 public interface UserService {
 
-    User findByUserName(String username);
+    User findUserByUsername(String username);
+
+    User findUserByEmail(String email);
 
     public List<User> findAllUsers();
 
