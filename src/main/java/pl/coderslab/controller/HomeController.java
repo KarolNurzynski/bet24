@@ -57,11 +57,10 @@ public class HomeController {
                         BindingResult result,
                         HttpSession sess,
                         Model model) {
-        System.out.println("===============");
+
         if (result.hasErrors()) {
             return "login";
         }
-        System.out.println("===============");
 
         User userFromDBByUsername = userService.findUserByUsername(user.getUsername());
         if ((userFromDBByUsername == null) ||

@@ -12,8 +12,13 @@ import java.util.List;
 public interface OperationRepository extends JpaRepository<Operation,Long> {
 
     @Query("Select SUM(o.value) from Operation o where o.account.id = :accountId")
-    BigDecimal getSumOfAllOperationsValue(@Param("accountId") Long accountId);
+    BigDecimal getSumOfAllOperationsValueByAccountId(@Param("accountId") Long accountId);
+
+    @Query("Select SUM(o.value) from Operation o where o.user.id = :userId")
+    BigDecimal getSumOfAllOperationsValueByUserId(@Param("userId") Long userId);
 
     List<Operation> findAllByAccountIdOrderByDateDesc(Long accountId);
+
+    List<Operation> findAllByUserIdOrderByDateDesc(Long accountId);
 
 }

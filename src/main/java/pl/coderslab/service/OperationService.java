@@ -21,6 +21,10 @@ public interface OperationService {
 
     public BigDecimal getSumOfAllOperationsValueByAccountId(Long id);
 
+    public BigDecimal getSumOfAllOperationsValueByUserId(Long id);
+
     public List<Operation> findAllOperationsByAccountId(Long id);
+
+    public List<Operation> findAllOperationsByUserId(Long id);
 
 }

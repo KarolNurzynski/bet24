@@ -56,18 +56,20 @@
         <th>
             <td>Description</td>
             <td>Value</td>
+            <td>Made by (account number)</td>
             <td>Date</td>
         </th>
-        <tr th:each ="operation, iter : ${accountOperations}">
+        <tr th:each ="operation, iter : ${userOperations}">
             <td th:text="${iter.count}"/>
             <td th:text="${operation.description}"/>
             <td th:text="${operation.value}"/>
+            <td th:text="${operation.account.accountNumber}"/>
             <td th:text="${operation.date}"/>
         </tr>
         <tr>
             <td></td>
             <td>TOTAL</td>
-            <td th:text="${accountSummary}"></td>
+            <td th:text="${userOperationsSummary}"></td>
         </tr>
 
     </table>

@@ -25,4 +25,8 @@ public class Operation {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

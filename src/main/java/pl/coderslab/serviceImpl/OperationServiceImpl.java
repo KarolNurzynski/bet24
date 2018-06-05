@@ -40,11 +40,20 @@ public class OperationServiceImpl implements OperationService {
     }
 
     public BigDecimal getSumOfAllOperationsValueByAccountId(Long id) {
-        return operationRepository.getSumOfAllOperationsValue(id);
+        return operationRepository.getSumOfAllOperationsValueByAccountId(id);
+    }
+
+    public BigDecimal getSumOfAllOperationsValueByUserId(Long id) {
+        return operationRepository.getSumOfAllOperationsValueByUserId(id);
     }
 
     public List<Operation> findAllOperationsByAccountId(Long id) {
         return operationRepository.findAllByAccountIdOrderByDateDesc(id);
+    }
+
+    public List<Operation> findAllOperationsByUserId(Long user_id) {
+
+        return operationRepository.findAllByUserIdOrderByDateDesc(user_id);
     }
 
 }
