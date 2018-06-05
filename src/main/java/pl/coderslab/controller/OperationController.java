@@ -34,7 +34,6 @@ public class OperationController {
     public String addOperation(Model model, HttpSession sess){
 
         Long user_id = (Long) sess.getAttribute("user_id");
-
         Account account = accountService.findAccountByUserId(user_id);
 
         if (account==null) {
@@ -44,7 +43,6 @@ public class OperationController {
         List<Operation> accountOperations = operationService.findAllOperationsByAccountId(account.getId());
 
         BigDecimal accountSummary = operationService.getSumOfAllOperationsValueByAccountId(account.getId());
-
 
         model.addAttribute("accountOperations", accountOperations);
         model.addAttribute("accountSummary", accountSummary);
@@ -56,7 +54,6 @@ public class OperationController {
     public String addOperation(@Valid @ModelAttribute Operation operation,
                                BindingResult result,
                                HttpSession sess){
-        System.out.println("=======post====");
         if (result.hasErrors()) {
             return "operationListAll";
         }
@@ -67,40 +64,6 @@ public class OperationController {
         operationService.saveOperation(operation);
         return "redirect:/operation/add";
     }
-
-    @GetMapping("/show/all")
-    public String showAllOperations(Model model) {
-        return "operationListAll";
-    }
-
-    @GetMapping("/show/{operation_id")
-    public String showOperation(@PathVariable Long operation_id, Model model) {
-        model.addAttribute(operationService.findOperationById(operation_id));
-        return "operationShow";
-    }
-
-
-//    @GetMapping("/edit/{operation_id}")
-//    public String editOperation(@PathVariable Long operation_id, Model model) {
-//        Operation operation = operationService.findOperationById(operation_id);
-//        model.addAttribute("operation",operation);
-//        return "operationEditForm";
-//    }
-//
-//    @PostMapping("/edit/{operation_id}")
-//    public String editOperation(@ModelAttribute Operation operation,
-//                           @PathVariable Long operation_id,
-//                           Model model) {
-//        operation.setId(operation_id);
-//        operationService.editOperation(operation);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/delete/{operation_id}")
-//    public String deleteOperation(@PathVariable Long operation_id, Model model) {
-//        operationService.deleteOperation(operation_id);
-//        return "redirect:/";
-//    }
 
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////

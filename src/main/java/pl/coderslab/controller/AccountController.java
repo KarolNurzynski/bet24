@@ -43,11 +43,12 @@ public class AccountController {
     }
 
     @PostMapping("/add")
-    public String addAccount(@ModelAttribute Account account,
+    public String addAccount(@Valid @ModelAttribute Account account,
+                             BindingResult result,
                              HttpSession sess){
-//        if (result.hasErrors()) {
-//            return "accountForm";
-//        }
+        if (result.hasErrors()) {
+            return "accountForm";
+        }
         Long user_id = (Long) sess.getAttribute("user_id");
 
         User user = userService.findUserById(user_id);
@@ -56,16 +57,16 @@ public class AccountController {
         return "redirect:/home";
     }
 
-    @GetMapping("/show/all")
-    public String showAllAccounts(Model model) {
-        return "accountListAll";
-    }
-
-    @GetMapping("/show/{account_id")
-    public String showAccount(@PathVariable Long account_id, Model model) {
-        model.addAttribute(accountService.findAccountById(account_id));
-        return "accountShow";
-    }
+//    @GetMapping("/show/all")
+//    public String showAllAccounts(Model model) {
+//        return "accountListAll";
+//    }
+//
+//    @GetMapping("/show/{account_id")
+//    public String showAccount(@PathVariable Long account_id, Model model) {
+//        model.addAttribute(accountService.findAccountById(account_id));
+//        return "accountShow";
+//    }
 
 
 //    @GetMapping("/edit/{account_id}")
