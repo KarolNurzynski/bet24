@@ -12,6 +12,8 @@ public interface AccountService {
 
     public Account findAccountById(Long id);
 
+    public Account findAccountByUserId(Long id);
+
     public Account saveAccount(Account account);
 
     public Account editAccount(Account account);

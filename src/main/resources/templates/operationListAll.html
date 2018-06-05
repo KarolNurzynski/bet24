@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
@@ -37,11 +38,16 @@
             <td>Value</td>
             <td>Date</td>
         </th>
-        <tr th:each="operation : ${operations}">
-            <td th:text="${operation.id}"/>
+        <tr th:each ="operation, iter : ${accountOperations}">
+            <td th:text="${iter.count}"/>
             <td th:text="${operation.description}"/>
             <td th:text="${operation.value}"/>
             <td th:text="${operation.date}"/>
+        </tr>
+        <tr>
+            <td></td>
+            <td>TOTAL</td>
+            <td th:text="${accountSummary}"></td>
         </tr>
 
     </table>

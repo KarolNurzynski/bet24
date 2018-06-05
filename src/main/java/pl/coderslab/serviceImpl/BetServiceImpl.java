@@ -30,6 +30,10 @@ public class BetServiceImpl implements BetService {
         return betRepository.save(bet);
     }
 
+    public void saveListOfBets(List<Bet> listOfBets) {
+        betRepository.saveAll(listOfBets);
+    }
+
     public Bet editBet(Bet bet) {
         return betRepository.save(bet);
     }

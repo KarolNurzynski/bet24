@@ -3,6 +3,7 @@ package pl.coderslab.service;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Operation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -17,5 +18,9 @@ public interface OperationService {
     public Operation editOperation(Operation operation);
 
     public void deleteOperation(Long id);
+
+    public BigDecimal getSumOfAllOperationsValueByAccountId(Long id);
+
+    public List<Operation> findAllOperationsByAccountId(Long id);
 
 }

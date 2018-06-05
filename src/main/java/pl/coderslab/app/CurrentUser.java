@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.app;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -62,11 +62,13 @@ public class HomeController {
             return "login";
         } else {
             Long user_id = userFromDB.getId();
+
             List<Bet> cartOfBets = new ArrayList<>();
             sess.setAttribute("user_id",user_id);
             sess.setAttribute("cartOfBets", cartOfBets);
             sess.setMaxInactiveInterval(120);
-            model.addAttribute("betOffer",new BetOffer());
+            model.addAttribute("betOffer", new BetOffer());
+            model.addAttribute("user", user);
             return "homeView";
         }
     }

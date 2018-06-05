@@ -21,7 +21,7 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Operation> operations;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private User user;
 
 }

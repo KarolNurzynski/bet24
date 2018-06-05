@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -6,7 +6,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import pl.coderslab.CurrentUser;
 import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.UserService;

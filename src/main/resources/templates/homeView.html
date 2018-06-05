@@ -20,10 +20,16 @@
 
 <section layout:fragment="content">
 
+    <div th:if="${session.user_id != null}" th:text="|User: ${session.user_id}|"></div>
+
+    <p><a th:href="@{/operation/add}">Wallet</a></p>
+
     <span sec:authorize="isAuthenticated()">
+
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Log out"/>
         </form>
+
     </span>
 
     <h1>Welcome on Bet24</h1>
@@ -51,6 +57,7 @@
         <th>
         <td>Type</td>
         <td>Odds</td>
+        <td>Add to cart</td>
         </th>
         <tr th:each="betOffer : ${betOffers}">
             <td th:text="${betOffer.id}"/>
@@ -61,43 +68,31 @@
 
     </table>
 
+
     <h2>Your cart:</h2>
 
-    <table>
-        <th>
-        <td>Game</td>
-        <td>Bet type</td>
-        <td>Odds</td>
-        <td>Stake</td>
-        </th>
-        <tr th:each="bet,iter : ${session.cartOfBets}">
-            <td th:text="${iter.count}"/>
-            <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
-            <td th:text="${bet.betOffer.betOfferType.name}"/>
-            <td th:text="${bet.betOffer.odds}"/>
-            <td th:text="${bet.stake}"/>
-        </tr>
+    <div th:if="${not #lists.isEmpty(session.cartOfBets)}">
+        <table >
+            <th>
+            <td>Game</td>
+            <td>Bet type</td>
+            <td>Odds</td>
+            <td>Stake</td>
+            </th>
+            <tr th:each="bet,iter : ${session.cartOfBets}">
+                <td th:text="${iter.count}"/>
+                <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
+                <td th:text="${bet.betOffer.betOfferType.name}"/>
+                <td th:text="${bet.betOffer.odds}"/>
+                <td th:text="${bet.stake}"/>
+            </tr>
+        </table>
 
-    </table>
-
-    <!--<form th:action="@{/bet/add/{betOffer_id}(betOffer_id=${betOffer.id})}" th:object="${bet}" method="post">-->
-
-        <!--<p><input th:field="*{stake}" placeholder="stake">stake</p>-->
-        <!--<p th:if="${#fields.hasErrors('stake')}" th:errors="*{stake}">Incorrect stake</p>-->
-
-        <!--<p><input type="submit" value="submit"></p>-->
-
-    <!--</form>-->
+        <p><a th:href="@{/bet/add/cartOfBets}">Go to payment</a></p>
+    </div>
 
 
-    <!--<form th:action="@{/betOffer/add}" th:object="${betOffer}" method="post">-->
 
-        <!--<p><input th:field="*{stake}" placeholder="stake">stake</p>-->
-        <!--<p th:if="${#fields.hasErrors('stake')}" th:errors="*{stake}">Incorrect stake</p>-->
-
-        <!--<p><input type="submit" value="submit"></p>-->
-
-    <!--</form>-->
 
 
 

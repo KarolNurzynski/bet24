@@ -3,6 +3,7 @@ package pl.coderslab.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Account;
+import pl.coderslab.entity.Operation;
 import pl.coderslab.repository.AccountRepository;
 import pl.coderslab.service.AccountService;
 
@@ -26,6 +27,10 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(id).orElseGet(null);
     }
 
+    public Account findAccountByUserId(Long id) {
+        return accountRepository.findOneByUserId(id);
+    }
+
     public Account saveAccount(Account account) {
         return accountRepository.save(account);
     }
@@ -37,7 +42,6 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
     }
-
 
 
 }

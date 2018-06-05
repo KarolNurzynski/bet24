@@ -6,6 +6,7 @@ import pl.coderslab.entity.Operation;
 import pl.coderslab.repository.OperationRepository;
 import pl.coderslab.service.OperationService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -36,6 +37,14 @@ public class OperationServiceImpl implements OperationService {
 
     public void deleteOperation(Long id) {
         operationRepository.deleteById(id);
+    }
+
+    public BigDecimal getSumOfAllOperationsValueByAccountId(Long id) {
+        return operationRepository.getSumOfAllOperationsValue(id);
+    }
+
+    public List<Operation> findAllOperationsByAccountId(Long id) {
+        return operationRepository.findAllByAccountIdOrderByDateDesc(id);
     }
 
 }

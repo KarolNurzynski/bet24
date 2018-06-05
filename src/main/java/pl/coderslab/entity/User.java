@@ -30,7 +30,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Bet> bets;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
 

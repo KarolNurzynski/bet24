@@ -11,6 +11,7 @@ import pl.coderslab.service.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -64,31 +65,31 @@ public class BetController {
         cart.add(bet);
 
         List<Bet> cart2 = (List<Bet>) sess.getAttribute("cartOfBets");
-        System.out.println("===========");
-        System.out.println(cart2.get(0).getStake());
-//        betService.saveBet(bet);
+
         return "redirect:/home";
     }
 
-//    @GetMapping("/add/cartOfBets")
-//    public String addcartOfBets(HttpSession sess){
-//        List<Bet> cartOfBets = (List<Bet>) sess.getAttribute("cartOfBets");
-//        model.addAttribute("bet", new Bet());
-//        model.addAttribute("betOffer",
-//                betOfferService.findBetOfferById(betOffer_id));
-//        return "betForm";
+    @GetMapping("/add/cartOfBets")
+    public String addcartOfBets(HttpSession sess){
+        List<Bet> cartOfBets = (List<Bet>) sess.getAttribute("cartOfBets");
+        betService.saveListOfBets(cartOfBets);
+
+        cartOfBets.clear();
+        sess.setAttribute("cartOfBets",cartOfBets);
+        return "redirect:/home";
+    }
+
+
+//    @GetMapping("/show/all")
+//    public String showAllBets(Model model) {
+//        return "betListAll";
 //    }
-
-    @GetMapping("/show/all")
-    public String showAllBets(Model model) {
-        return "betListAll";
-    }
-
-    @GetMapping("/show/{bet_id")
-    public String showBet(@PathVariable Long bet_id, Model model) {
-        model.addAttribute(betService.findBetById(bet_id));
-        return "betShow";
-    }
+//
+//    @GetMapping("/show/{bet_id")
+//    public String showBet(@PathVariable Long bet_id, Model model) {
+//        model.addAttribute(betService.findBetById(bet_id));
+//        return "betShow";
+//    }
 
 
 //    @GetMapping("/edit/{bet_id}")

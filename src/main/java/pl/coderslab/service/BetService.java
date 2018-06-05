@@ -14,6 +14,8 @@ public interface BetService {
 
     public Bet saveBet(Bet bet);
 
+    public void saveListOfBets(List<Bet> listOfBets);
+
     public Bet editBet(Bet bet);
 
     public void deleteBet(Long id);
