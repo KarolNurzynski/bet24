@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorator="layout">
 <head>
-    <title>Bet24 - login</title>
+    <title>Bet24 - access denied</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -11,7 +12,7 @@
 
     <h1>You are not allowed to enter this page</h1>
 
-    <a th:href="@{/}">Back to home page</a>
+    <a th:href="@{/home}">Back to home page</a>
 
 </section>
 </body>

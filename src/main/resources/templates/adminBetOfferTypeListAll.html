@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="adminLayout">
+<head>
+    <title>New bet offer type</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <form th:action="@{/betOfferType/add}" th:object="${betOfferType}" method="post">
+
+        <p><input th:field="*{name}" placeholder="name">name</p>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+    <h1>All betOfferTypes: </h1>
+
+    <table>
+        <th>
+        <td>Name</td>
+        <td>Edit</td>
+        <td>Delete</td>
+        </th>
+        <tr th:each="betOfferType : ${betOfferTypes}">
+            <td th:text="${betOfferType.id}"/>
+            <td th:text="${betOfferType.name}"/>
+            <td><a th:href="@{'/betOfferType/edit/'+${betOfferType.id}}">edit</a></td>
+            <td><a th:href="@{'/betOfferType/delete/'+${betOfferType.id}}">delete</a></td>
+
+        </tr>
+
+    </table>
+
+</section>
+</body>
+</html>

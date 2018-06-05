@@ -4,19 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.entity.Bet;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.BetOffer;
 import pl.coderslab.entity.BetOfferType;
 import pl.coderslab.entity.Event;
 import pl.coderslab.service.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -39,71 +33,51 @@ public class BetOfferController {
     EventService eventService;
 
     @GetMapping("/add")
-    public String addBet(Model model){
+    public String addBetOffer(Model model){
         model.addAttribute("betOffer", new BetOffer());
-        return "redirect:/";
+        return "adminBetOfferListAll";
     }
 
     @PostMapping("/add")
-    public String addBetOffer(@ModelAttribute BetOffer betOffer){
-//        if (result.hasErrors()) {
-//            return "redirect:/";
-//        }
-        betOffer.setPublished(LocalDateTime.now());
+    public String addBetOffer(@Valid @ModelAttribute BetOffer betOffer,
+                             BindingResult result){
+        if (result.hasErrors()) {
+            return "adminBetOfferListAll";
+        }
         betOfferService.saveBetOffer(betOffer);
-        return "redirect:/";
+        return "redirect:/betOffer/add";
     }
 
-    @GetMapping("/show/all")
-    public String showAllBets(Model model) {
-        return "betOfferListAll";
+    @GetMapping("/edit/{betOffer_id}")
+    public String editBetOffer(@PathVariable Long betOffer_id,
+                                   Model model) {
+        BetOffer betOffer = betOfferService.findBetOfferById(betOffer_id);
+        model.addAttribute("betOffer", betOffer);
+        return "adminBetOfferEditForm";
     }
-//
-//    @GetMapping("/show/{bet_id")
-//    public String showBet(@PathVariable Long bet_id, Model model) {
-//        model.addAttribute(betService.findBetById(bet_id));
-//        return "betShow";
-//    }
-//
-//    @GetMapping("/edit/{bet_id}")
-//    public String editBet(@PathVariable Long bet_id, Model model) {
-//        Bet bet = betService.findBetById(bet_id);
-//        model.addAttribute("bet",bet);
-//        return "betEditForm";
-//    }
-//
-//    @PostMapping("/edit/{bet_id}")
-//    public String editBet(@ModelAttribute Bet bet,
-//                           @PathVariable Long bet_id,
-//                           Model model) {
-//        bet.setId(bet_id);
-//        betService.editBet(bet);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/delete/{bet_id}")
-//    public String deleteBet(@PathVariable Long bet_id, Model model) {
-//        betService.deleteBet(bet_id);
-//        return "redirect:/";
-//    }
+
+    @PostMapping("/edit/{betOffer_id}")
+    public String editBetOffer(@ModelAttribute BetOffer betOffer,
+                           @PathVariable Long betOffer_id,
+                           Model model) {
+        betOfferService.editBetOffer(betOffer);
+        return "redirect:/betOffer/add";
+    }
+
+    @GetMapping("/delete/{betOffer_id}")
+    public String deleteBetOffer(@PathVariable Long betOffer_id, Model model) {
+        betOfferService.deleteBetOffer(betOffer_id);
+        return "redirect:/betOffer/add";
+    }
 
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////
 
-//    @ModelAttribute("users")
-//    public List<User> users() {
-//        return userServiceInterface.findAllUsers();
-//    }
-//
-    @ModelAttribute("bets")
-    public List<Bet> bets() {
-    return betService.findAllBets();
-}
-
     @ModelAttribute("events")
-    public List<Event> allEvents() {
+    public List<Event> events() {
         return eventService.findAllEvents();
     }
+
 
     @ModelAttribute("betOfferTypes")
     public List<BetOfferType> allBetOfferTypes() {

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="adminLayout">
+<head>
+    <title>Bet offer manager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <form th:action="@{/betOffer/add}" th:object="${betOffer}" method="post">
+
+        <select th:field="*{event}">
+            <option th:each="event : ${events}"
+                    th:value="${event.id}"
+                    th:text="|${event.teamA} vs ${event.teamB}|">User</option>
+        </select>
+
+        <select th:field="*{betOfferType}">
+            <option th:each="type : ${betOfferTypes}"
+                    th:value="${type.id}"
+                    th:text="|${type.name}|">Bet offer type</option>
+        </select>
+
+        <p><input th:field="*{odds}" placeholder="odds">odds</p>
+        <p th:if="${#fields.hasErrors('odds')}" th:errors="*{odds}">Incorrect odds</p>
+
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+    <h1>All bet offers: </h1>
+
+    <table>
+        <th>
+        <td>Type</td>
+        <td>Odds</td>
+        <td>Edit</td>
+        <td>Delete</td>
+        </th>
+        <tr th:each="betOffer : ${betOffers}">
+            <td th:text="${betOffer.id}"/>
+            <td th:text="${betOffer.betOfferType.name}"/>
+            <td th:text="${betOffer.odds}"/>
+            <td><a th:href="@{'/betOffer/edit/'+${betOffer.id}}">edit</a></td>
+            <td><a th:href="@{'/betOffer/delete/'+${betOffer.id}}">delete</a></td>
+
+
+        </tr>
+
+    </table>
+
+</section>
+</body>
+</html>

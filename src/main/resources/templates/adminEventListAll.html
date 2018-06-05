@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="adminLayout">
+<head>
+    <title>Event manager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <form th:action="@{/event/add}" th:object="${event}" method="post">
+
+        <p><input th:field="*{teamA}" placeholder="teamA">teamA</p>
+        <p th:if="${#fields.hasErrors('teamA')}" th:errors="*{teamA}">Incorrect teamA</p>
+
+        <p><input th:field="*{teamB}" placeholder="teamB">teamB</p>
+        <p th:if="${#fields.hasErrors('teamB')}" th:errors="*{teamB}">Incorrect teamB</p>
+
+        <p><input th:field="*{strengthA}" placeholder="strengthA">strengthA</p>
+        <p th:if="${#fields.hasErrors('strengthA')}" th:errors="*{strengthA}">Incorrect strengthA</p>
+
+        <p><input th:field="*{strengthB}" placeholder="strengthB">strengthB</p>
+        <p th:if="${#fields.hasErrors('strengthB')}" th:errors="*{strengthB}">Incorrect strengthB</p>
+
+        <!--<p><input type='datetime-local' th:field="*{startDate}" placeholder="startDate">startDate</p>-->
+        <!--<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>-->
+
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+    <h1>All events: </h1>
+
+    <table>
+        <th>
+        <td>Team A</td>
+        <td>Team B</td>
+        <td>Edit</td>
+        <td>Delete</td>
+        </th>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}"/>
+            <td th:text="${event.teamA}"/>
+            <td th:text="${event.teamB}"/>
+            <td><a th:href="@{'/event/edit/'+${event.id}}">edit</a></td>
+            <td><a th:href="@{'/event/delete/'+${event.id}}">delete</a></td>
+
+
+        </tr>
+
+    </table>
+
+</section>
+</body>
+</html>

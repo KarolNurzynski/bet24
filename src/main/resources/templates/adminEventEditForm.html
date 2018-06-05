@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="adminLayout">
+<head>
+    <title>Edit event </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <h1>Edit event: </h1>
+
+    <form th:action="@{'/event/edit/'+${event.id}}" th:object="${event}" method="post">
+
+        <p><input th:field="*{teamA}" placeholder="teamA">teamA</p>
+        <p th:if="${#fields.hasErrors('teamA')}" th:errors="*{teamA}">Incorrect teamA</p>
+
+        <p><input th:field="*{teamB}" placeholder="teamB">teamB</p>
+        <p th:if="${#fields.hasErrors('teamB')}" th:errors="*{teamB}">Incorrect teamB</p>
+
+        <p><input th:field="*{strengthA}" placeholder="strengthA">strengthA</p>
+        <p th:if="${#fields.hasErrors('strengthA')}" th:errors="*{strengthA}">Incorrect strengthA</p>
+
+        <p><input th:field="*{strengthB}" placeholder="strengthB">strengthB</p>
+        <p th:if="${#fields.hasErrors('strengthB')}" th:errors="*{strengthB}">Incorrect strengthB</p>
+
+        <!--<p><input type='datetime-local' th:field="*{startDate}" placeholder="startDate">startDate</p>-->
+        <!--<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>-->
+
+
+        <input type="hidden" th:field="*{id}" />
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+</section>
+</body>
+</html>

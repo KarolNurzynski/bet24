@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/home", "/").anonymous()
                 .antMatchers("/bet", "/logout").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/betOffer/**", "/event/**").permitAll()     // for production it will be authenticated with ADMIN_ROLE account
+//                .antMatchers("/betOffer/**", "/event/**").permitAll()     // for production it will be authenticated with ADMIN_ROLE account
                 .anyRequest().permitAll()   //denyAll() - 403 access denied page
             .and()
                 .formLogin()
@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .logoutSuccessUrl("/home")    //overrides standard Spring logout action
             .and()
                 .exceptionHandling()
-                    .accessDeniedPage("/403");
+                    .accessDeniedPage("/403.html");
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
