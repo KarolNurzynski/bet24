@@ -37,67 +37,117 @@ public class AccountController {
 
 
     @GetMapping("/add")
-    public String addAccount(Model model){
+    public String addAccount(Model model,
+                             HttpSession sess){
+        Long user_id = (Long) sess.getAttribute("user_id");
+        User user = userService.findUserById(user_id);
+
+        List<Account> accounts = accountService.findAllAccountsByUserId(user_id);
+
+        if (accounts!=null) {
+            model.addAttribute("accounts", accounts);
+        }
+
         model.addAttribute("account", new Account());
-        return "accountForm";
+
+        return "accountListAll";
     }
 
     @PostMapping("/add")
     public String addAccount(@Valid @ModelAttribute Account account,
                              BindingResult result,
-                             HttpSession sess){
-//        if (result.hasErrors()) {
-//            return "accountForm";
-//        }
-//        Long user_id = (Long) sess.getAttribute("user_id");
-//
-//        User user = userService.findUserById(user_id);
-//        user.setAccounts(account);
-//        userService.editUser(user);
-        return "redirect:/home";
+                             HttpSession sess,
+                             Model model){
+        if (result.hasErrors()) {
+            return "accountListAll";
+        }
+
+        Long user_id = (Long) sess.getAttribute("user_id");
+        User user = userService.findUserById(user_id);
+
+        accountService.activateUserAccount(user_id, account);
+
+        return "redirect:/account/add";
+    }
+
+    @GetMapping("/activate/{account_id}")
+    public String activateAccount(Model model,
+                             HttpSession sess,
+                                  @PathVariable Long account_id){
+
+        Long user_id = (Long) sess.getAttribute("user_id");
+        User user = userService.findUserById(user_id);
+        Account account = accountService.findAccountById(account_id);
+
+        model.addAttribute("account", new Account());
+
+        accountService.activateUserAccount(user_id, account);
+
+        return "redirect:/account/add";
     }
 
 //    @GetMapping("/show/all")
 //    public String showAllAccounts(Model model) {
+//
+//        List<Account> accounts = accountService.findAllAccounts();
+//        model.addAttribute("accounts", accounts);
+//
 //        return "accountListAll";
 //    }
 //
-//    @GetMapping("/show/{account_id")
+//    @GetMapping("/show/allUserAccounts")
+//    public String showAllUserAccounts(Model model,
+//                                      HttpSession sess) {
+//
+//        Long user_id = (Long) sess.getAttribute("user_id");
+//        User user = userService.findUserById(user_id);
+//
+//        List<Account> accounts = accountService.findAllAccountsByUserId(user_id);
+//        model.addAttribute("accounts", accounts);
+//
+//        return "accountListAll";
+//    }
+//
+//
+//
+//    @GetMapping("/show/{account_id}")
 //    public String showAccount(@PathVariable Long account_id, Model model) {
 //        model.addAttribute(accountService.findAccountById(account_id));
 //        return "accountShow";
 //    }
 
-
 //    @GetMapping("/edit/{account_id}")
-//    public String editAccount(@PathVariable Long account_id, Model model) {
-//        Account account = accountService.findAccountById(account_id);
-//        model.addAttribute("account",account);
-//        return "accountEditForm";
+//    public String editAccount(@PathVariable Long account_id,
+//                              Model model,
+//                              HttpSession sess){
+//        Account account = accountService.findAccountByUserId(account_id);
+//        model.addAttribute("account", account);
+//        return "accountForm";
 //    }
 //
 //    @PostMapping("/edit/{account_id}")
-//    public String editAccount(@ModelAttribute Account account,
-//                           @PathVariable Long account_id,
-//                           Model model) {
-//        account.setId(account_id);
-//        accountService.editAccount(account);
-//        return "redirect:/";
-//    }
+//    public String editAccount(@Valid @ModelAttribute Account account,
+//                             BindingResult result,
+//                             HttpSession sess){
+//        if (result.hasErrors()) {
+//            return "accountForm";
+//        }
+//        account.setActiveStatus(1);
+//        Long user_id = (Long) sess.getAttribute("user_id");
 //
-//    @GetMapping("/delete/{account_id}")
-//    public String deleteAccount(@PathVariable Long account_id, Model model) {
-//        accountService.deleteAccount(account_id);
-//        return "redirect:/";
+//        User user = userService.findUserById(user_id);
+//        account.setUser(user);
+//        accountService.saveAccount(account);
+//        return "redirect:/home";
 //    }
 
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////
 
-    @ModelAttribute("accounts")
-    public List<Account> accounts() {
-        return accountService.findAllAccounts();
-    }
+//    @ModelAttribute("accounts")
+//    public List<Account> accounts() {
+//        return accountService.findAllAccounts();
+//    }
 
     @ModelAttribute("events")
     public List<Event> events() {

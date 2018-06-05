@@ -8,16 +8,21 @@ import java.util.List;
 @Service
 public interface AccountService {
 
-    public List<Account> findAllAccounts();
 
     public Account findAccountById(Long id);
 
-    public Account findAccountByUserId(Long id);
+    public List<Account> findAllAccounts();
 
     public Account saveAccount(Account account);
 
     public Account editAccount(Account account);
 
     public void deleteAccount(Long id);
+
+    public List<Account> findAllAccountsByUserId(Long id);
+
+    public Account findActiveUserAccount(Long id);
+
+    public void activateUserAccount(Long user_id, Account account);
 
 }

@@ -13,6 +13,10 @@
         </td>
 
         <td th:if="${session.user_id != null}">
+            <a th:href="@{/account/add}">Accounts</a>
+        </td>
+
+        <td th:if="${session.user_id != null}">
             <form th:action="@{/logout}" method="post">
                 <input type="submit" value="Log out"/>
             </form>

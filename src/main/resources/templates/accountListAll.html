@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Accounts </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <form th:action="@{/account/add}" th:object="${account}" method="post">
+
+        <p><input th:field="*{accountNumber}" placeholder="accountNumber">accountNumber</p>
+        <p th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}">Incorrect accountNumber</p>
+
+        <p><input type="submit" value="submit"></p>
+
+    </form>
+
+    <h1>All accounts: </h1>
+
+    <table>
+        <th>
+            <td>Number</td>
+            <td>Active status</td>
+            <td>Activate</td>
+        </th>
+        <tr th:each="account,iter : ${accounts}">
+            <td th:text="${iter.count}"/>
+            <td th:text="${account.accountNumber}"/>
+            <td th:text="${account.activeStatus}"/>
+            <td><a th:href="@{'/account/activate/'+${account.id}}">activate</a></td>
+
+        </tr>
+
+    </table>
+
+</section>
+</body>
+</html>

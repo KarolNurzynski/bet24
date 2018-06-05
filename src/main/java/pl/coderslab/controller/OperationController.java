@@ -32,21 +32,21 @@ public class OperationController {
 
     @GetMapping("/add")
     public String addOperation(Model model, HttpSession sess){
-
-        Long user_id = (Long) sess.getAttribute("user_id");
-        Account account = accountService.findAccountByUserId(user_id);
-
-        if (account==null) {
-            return "redirect:/account/add";
-        }
-
-        List<Operation> accountOperations = operationService.findAllOperationsByAccountId(account.getId());
-
-        BigDecimal accountSummary = operationService.getSumOfAllOperationsValueByAccountId(account.getId());
-
-        model.addAttribute("accountOperations", accountOperations);
-        model.addAttribute("accountSummary", accountSummary);
-        model.addAttribute("operation", new Operation());
+//
+//        Long user_id = (Long) sess.getAttribute("user_id");
+//        Account account = accountService.findActiveUserAccount(user_id);
+//
+//        if (account==null) {
+//            return "redirect:/account/add";
+//        }
+//
+//        List<Operation> accountOperations = operationService.findAllOperationsByAccountId(account.getId());
+//
+//        BigDecimal accountSummary = operationService.getSumOfAllOperationsValueByAccountId(account.getId());
+//
+//        model.addAttribute("accountOperations", accountOperations);
+//        model.addAttribute("accountSummary", accountSummary);
+//        model.addAttribute("operation", new Operation());
         return "operationListAll";
     }
 
@@ -54,14 +54,14 @@ public class OperationController {
     public String addOperation(@Valid @ModelAttribute Operation operation,
                                BindingResult result,
                                HttpSession sess){
-        if (result.hasErrors()) {
-            return "operationListAll";
-        }
-        Long user_id = (Long) sess.getAttribute("user_id");
-        operation.setAccount(accountService.findAccountByUserId(user_id));
-        operation.setDate(LocalDateTime.now());
-        operation.setDescription("Account recharged by user");
-        operationService.saveOperation(operation);
+//        if (result.hasErrors()) {
+//            return "operationListAll";
+//        }
+//        Long user_id = (Long) sess.getAttribute("user_id");
+//        operation.setAccount(accountService.findAccountByUserId(user_id));
+//        operation.setDate(LocalDateTime.now());
+//        operation.setDescription("Account recharged by user");
+//        operationService.saveOperation(operation);
         return "redirect:/operation/add";
     }
 

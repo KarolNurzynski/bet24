@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Account;
 import pl.coderslab.entity.Operation;
 import pl.coderslab.repository.AccountRepository;
+import pl.coderslab.repository.UserRepository;
 import pl.coderslab.service.AccountService;
 
 import java.util.List;
@@ -12,7 +13,12 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService {
 
+    @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
 
     @Autowired
     AccountServiceImpl(AccountRepository accountRepository) {
@@ -27,8 +33,8 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(id).orElseGet(null);
     }
 
-    public Account findAccountByUserId(Long id) {
-        return accountRepository.findOneByUserId(id);
+    public List<Account> findAllAccountsByUserId(Long id) {
+        return accountRepository.findAllByUserId(id);
     }
 
     public Account saveAccount(Account account) {
@@ -43,5 +49,23 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.deleteById(id);
     }
 
+    public Account findActiveUserAccount(Long id) {
+        return accountRepository.findOneByUserIdAndActiveStatusIsTrue(id);
+    }
+
+    @Override
+    public void activateUserAccount(Long user_id, Account account) {
+
+        Account activeAccount = accountRepository.findOneByUserIdAndActiveStatusIsTrue(user_id);
+
+        if (activeAccount!=null) {
+            activeAccount.setActiveStatus(false);
+            accountRepository.save(activeAccount);
+        }
+
+        account.setUser(userRepository.findById(user_id).orElse(null));
+        account.setActiveStatus(true);
+        accountRepository.save(account);
+    }
 
 }

@@ -51,8 +51,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Bet> bets;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id")
-    private Account account;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = use be"account_id")
+//    private Account account;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Account> accounts;
 
 }
