@@ -6,5 +6,4 @@ import pl.coderslab.entity.Event;
 
 public interface BetOfferTypeRepository extends JpaRepository<BetOfferType,Long> {
 
-
 }

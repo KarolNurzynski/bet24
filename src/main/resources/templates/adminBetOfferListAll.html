@@ -46,6 +46,8 @@
         <th>
         <td>Type</td>
         <td>Odds</td>
+        <td>Game</td>
+        <td>Event id</td>
         <td>Edit</td>
         <td>Delete</td>
         </th>
@@ -53,6 +55,8 @@
             <td th:text="${betOffer.id}"/>
             <td th:text="${betOffer.betOfferType.name}"/>
             <td th:text="${betOffer.odds}"/>
+            <td th:text="|${betOffer.event.teamA} (${betOffer.event.scoreA}) vs ${betOffer.event.teamB} (${betOffer.event.scoreB})|"/>
+            <td th:text="|Event ${betOffer.event.id}|"/>
             <td><a th:href="@{'/betOffer/edit/'+${betOffer.id}}">edit</a></td>
             <td><a th:href="@{'/betOffer/delete/'+${betOffer.id}}">delete</a></td>
 

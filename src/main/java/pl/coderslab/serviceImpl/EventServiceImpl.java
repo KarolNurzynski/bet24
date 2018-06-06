@@ -45,6 +45,8 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findAllByTimeLeftIsBefore(LocalTime.of(0,0,5));
     }
 
+
+
 //    @Scheduled(fixedRate = 1000)
 //    public List<Event> updateAllActiveEvents() {
 //        return null;

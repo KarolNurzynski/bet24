@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="adminLayout">
+<head>
+    <title>Edit bet offer </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <h1>Admin zone: </h1>
+
+    <!--<h1>Edit bet offer: </h1>-->
+
+    <!--<form th:action="@{'/betOffer/edit/'+${betOffer.id}}" th:object="${betOffer}" method="post">-->
+
+        <!--<select th:field="*{event}">-->
+            <!--<option th:each="event : ${events}"-->
+                    <!--th:value="${event.id}"-->
+                    <!--th:text="|${event.teamA} vs ${event.teamA}|">User</option>-->
+        <!--</select>-->
+
+        <!--<select th:field="*{betOfferType}">-->
+            <!--<option th:each="type : ${betOfferTypes}"-->
+                    <!--th:value="${type.id}"-->
+                    <!--th:text="|${type.name}|">Bet offer type</option>-->
+        <!--</select>-->
+
+        <!--<p><input th:field="*{odds}" placeholder="odds">odds</p>-->
+        <!--<p th:if="${#fields.hasErrors('odds')}" th:errors="*{odds}">Incorrect odds</p>-->
+
+
+        <!--<input type="hidden" th:field="*{id}" />-->
+
+        <!--<p><input type="submit" value="submit"></p>-->
+
+    <!--</form>-->
+
+</section>
+</body>
+</html>

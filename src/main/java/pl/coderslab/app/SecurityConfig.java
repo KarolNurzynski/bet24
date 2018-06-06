@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login", "/home", "/").anonymous()
                 .antMatchers("/bet", "/logout").authenticated()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/betOffer/**", "/event/**").permitAll()     // for production it will be authenticated with ADMIN_ROLE account
                 .anyRequest().permitAll()   //denyAll() - 403 access denied page
             .and()

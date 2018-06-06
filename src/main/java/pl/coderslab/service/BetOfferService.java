@@ -20,4 +20,14 @@ public interface BetOfferService {
 
     List<BetOffer> findAllActiveBetOffers();
 
+    BetOffer findFirstByEvent_IdAndBetOfferType_Id(Long eventId, Long betOfferTypeId);
+
+    List<BetOffer> changeAllBetOffersToFinishedByEventId(Long event_id);
+
+    List<BetOffer> findAllActiveBetOffersByEvent_Id(Long eventId);
+
+    List<BetOffer> generateOrUpdateBetOffersBasedOnEventId(Long eventId);
+
+
+
 }

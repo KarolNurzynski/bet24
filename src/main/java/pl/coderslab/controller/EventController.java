@@ -47,7 +47,7 @@ public class EventController {
                            @PathVariable Long event_id,
                            Model model) {
         eventService.editEvent(event);
-        return "redirect:/event/add";
+        return "redirect:/event/edit/"+event_id;
     }
 
     @GetMapping("/delete/{event_id}")
