@@ -20,4 +20,8 @@ public interface BetService {
 
     public void deleteBet(Long id);
 
+    public List<Bet> findAllActiveBetsByUserId(Long id);
+
+    public List<Bet> findAllBetsByUserId(Long id);
+
 }

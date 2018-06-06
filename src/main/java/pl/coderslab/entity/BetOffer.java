@@ -1,5 +1,6 @@
 package pl.coderslab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class BetOffer {
     private Event event;
 
     @OneToMany(mappedBy = "betOffer")
+    @JsonIgnore
     private List<Bet> bets;
 
     @ManyToOne

@@ -16,6 +16,7 @@ import pl.coderslab.validation.ValidUsernamePassword;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,35 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String homeView(Model model) {
+    public String homeView(Model model,
+                           HttpSession sess) {
+
+        Long user_id = (Long) sess.getAttribute("user_id");
+        List<Bet> cart = (List<Bet>) sess.getAttribute("cartOfBets");
+
+        BigDecimal totalToPay = BigDecimal.valueOf(0);
+        BigDecimal totalToWin = BigDecimal.valueOf(0);
+
+        if (cart!=null) {
+            if (!cart.isEmpty()) {
+
+                for (Bet bet : cart) {
+                    totalToPay = totalToPay.add(bet.getStake());
+                    totalToWin = totalToWin.add(bet.getStake().multiply(bet.getBetOffer().getOdds()));
+                }
+
+                model.addAttribute("totalToPay", totalToPay);
+                model.addAttribute("totalToWin", totalToWin);
+            } else {
+                totalToPay = BigDecimal.valueOf(0);
+                totalToWin = BigDecimal.valueOf(0);
+            }
+        }
+
+
+        List<Bet> activeUserBets = betService.findAllActiveBetsByUserId(user_id);
+
+        model.addAttribute("activeUserBets", activeUserBets);
         model.addAttribute("user", new User());
         return "homeView";
     }
@@ -72,11 +101,13 @@ public class HomeController {
 
             List<Bet> cartOfBets = new ArrayList<>();
             sess.setAttribute("user_id",user_id);
-            sess.setAttribute("cartOfBets", cartOfBets);
             sess.setMaxInactiveInterval(120);
+
+            sess.setAttribute("cartOfBets", cartOfBets);
+
             model.addAttribute("betOffer", new BetOffer());
             model.addAttribute("user", user);
-            return "homeView";
+            return "redirect:/home";
         }
     }
 
@@ -102,9 +133,14 @@ public class HomeController {
         return betOfferTypeService.findAllBetOfferTypes();
     }
 
+
+    /////////////////////////    NOT STANDARD MODEL ATTRIBUTES   /////////////////////////////////
+
     @ModelAttribute("betOffers")
     public List<BetOffer> allBetOffers() {
-        return betOfferService.findAllBetOffers();
+        return betOfferService.findAllActiveBetOffers();
     }
+
+
 
 }

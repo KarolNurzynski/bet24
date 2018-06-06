@@ -34,9 +34,17 @@
         <p><input th:field="*{strengthB}" placeholder="strengthB">strengthB</p>
         <p th:if="${#fields.hasErrors('strengthB')}" th:errors="*{strengthB}">Incorrect strengthB</p>
 
-        <!--<p><input type='datetime-local' th:field="*{startDate}" placeholder="startDate">startDate</p>-->
-        <!--<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>-->
+        <p><input th:field="*{scoreA}" placeholder="scoreA">scoreA</p>
+        <p th:if="${#fields.hasErrors('scoreA')}" th:errors="*{scoreA}">Incorrect scoreA</p>
 
+        <p><input th:field="*{scoreB}" placeholder="scoreB">scoreB</p>
+        <p th:if="${#fields.hasErrors('scoreB')}" th:errors="*{scoreB}">Incorrect scoreB</p>
+
+        <p><input type='datetime' th:field="*{startDate}" placeholder="mm/dd/yy hh:mm PM">startDate(np. 6/23/18 5:54 PM)</p>
+        <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>
+
+        <p><input th:field="*{timeLeft}" placeholder="hh:mm AM">timeLeft(np. 1:20 AM)</p>
+        <p th:if="${#fields.hasErrors('timeLeft')}" th:errors="*{timeLeft}">Incorrect timeLeft</p>
 
         <input type="hidden" th:field="*{id}" />
 

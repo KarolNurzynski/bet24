@@ -1,5 +1,6 @@
 package pl.coderslab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Account {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="user_id")
+    @JsonIgnore
     private User user;
 
 }

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="adminLayout">
 <head>
-    <title>Event manager</title>
+    <title>Event24 manager</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         table {
@@ -18,7 +18,7 @@
 <body>
 <section layout:fragment="content">
 
-    <form th:action="@{/event/add}" th:object="${event}" method="post">
+    <form th:action="@{/event24/add}" th:object="${event24}" method="post">
 
         <p><input th:field="*{teamA}" placeholder="teamA">teamA</p>
         <p th:if="${#fields.hasErrors('teamA')}" th:errors="*{teamA}">Incorrect teamA</p>
@@ -40,7 +40,7 @@
 
     </form>
 
-    <h1>All events: </h1>
+    <h1>All event24: </h1>
 
     <table>
         <th>
@@ -49,12 +49,12 @@
         <td>Edit</td>
         <td>Delete</td>
         </th>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}"/>
-            <td th:text="${event.teamA}"/>
-            <td th:text="${event.teamB}"/>
-            <td><a th:href="@{'/event/edit/'+${event.id}}">edit</a></td>
-            <td><a th:href="@{'/event/delete/'+${event.id}}">delete</a></td>
+        <tr th:each="event24 : ${event24s}">
+            <td th:text="${event24.id}"/>
+            <td th:text="${event24.teamA}"/>
+            <td th:text="${event24.teamB}"/>
+            <td><a th:href="@{'/event24/edit/'+${event24.id}}">edit</a></td>
+            <td><a th:href="@{'/event24/delete/'+${event24.id}}">delete</a></td>
 
 
         </tr>

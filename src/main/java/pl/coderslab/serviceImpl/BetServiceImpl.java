@@ -42,4 +42,12 @@ public class BetServiceImpl implements BetService {
         betRepository.deleteById(id);
     }
 
+    public List<Bet> findAllActiveBetsByUserId(Long id) {
+        return betRepository.findAllByUserIdAndTimeMadeIsNotNullAndTimeEndIsNull(id);
+    }
+
+    public List<Bet> findAllBetsByUserId(Long id) {
+        return betRepository.findAllByUserId(id);
+    }
+
 }

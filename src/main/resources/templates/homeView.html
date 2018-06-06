@@ -131,6 +131,7 @@
                 <td>Bet type</td>
                 <td>Odds</td>
                 <td>Stake</td>
+                <td>To win</td>
                 </th>
                 <tr th:each="bet,iter : ${session.cartOfBets}">
                     <td th:text="${iter.count}"/>
@@ -138,45 +139,52 @@
                     <td th:text="${bet.betOffer.betOfferType.name}"/>
                     <td th:text="${bet.betOffer.odds}"/>
                     <td th:text="${bet.stake}"/>
+                    <td th:text="${bet.stake}*${bet.betOffer.odds}"/>
                 </tr>
             </table>
 
-            <p><a th:href="@{/bet/add/cartOfBets}">Go to payment</a></p>
+            <p th:text="|Total to pay : ${totalToPay}|"></p>
+            <p th:text="|Total to win : ${totalToWin}|"></p>
+
+            <p><a th:href="@{/operation/confirmPayment}">Go to payment</a></p>
         </div>
 
         <p>------------------------------------------------</p>
 
     </div>
 
-        <!--<div th:if="${session.user_id != null}">-->
-        <!--&lt;!&ndash;<div th:if="${ #lists.isEmpty(session.cartOfBets)}" th:text="No elements in the cart">&ndash;&gt;-->
+    <div th:if="${session.user_id != null}">
 
-        <!--<h2>List of your bets:</h2>-->
+        <h2>Your active bets:</h2>
 
-        <!--&lt;!&ndash;<div th:if="${not #lists.isEmpty(session.cartOfBets)}">&ndash;&gt;-->
-        <!--&lt;!&ndash;<table >&ndash;&gt;-->
-        <!--&lt;!&ndash;<th>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>Game</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>Bet type</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>Odds</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>Stake</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</th>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr th:each="bet,iter : ${session.cartOfBets}">&ndash;&gt;-->
-        <!--&lt;!&ndash;<td th:text="${iter.count}"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td th:text="${bet.betOffer.betOfferType.name}"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td th:text="${bet.betOffer.odds}"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td th:text="${bet.stake}"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;</table>&ndash;&gt;-->
+        <div th:if="${ #lists.isEmpty(activeUserBets)}">
+            <p>No active bets</p>
+        </div>
 
-        <!--&lt;!&ndash;<p><a th:href="@{/bet/add/cartOfBets}">Go to payment</a></p>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <div th:if="${not #lists.isEmpty(activeUserBets)}">
+            <table >
+                <th>
+                <td>Game</td>
+                <td>Bet type</td>
+                <td>Odds</td>
+                <td>Stake</td>
+                <td>To win</td>
+                </th>
+                <tr th:each="bet,iter : ${activeUserBets}">
+                    <td th:text="${iter.count}"/>
+                    <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
+                    <td th:text="${bet.betOffer.betOfferType.name}"/>
+                    <td th:text="${bet.betOffer.odds}"/>
+                    <td th:text="${bet.stake}"/>
+                    <td th:text="${bet.stake}*${bet.betOffer.odds}"/>
+                </tr>
+            </table>
 
-        <!--</div>-->
+        </div>
 
+        <p>------------------------------------------------</p>
 
-
+    </div>
 
 </section>
 </body>

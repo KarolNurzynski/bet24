@@ -11,6 +11,7 @@ import pl.coderslab.entity.Event;
 import pl.coderslab.service.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -44,6 +45,7 @@ public class BetOfferController {
         if (result.hasErrors()) {
             return "adminBetOfferListAll";
         }
+        betOffer.setPublished(LocalDateTime.now());
         betOfferService.saveBetOffer(betOffer);
         return "redirect:/betOffer/add";
     }

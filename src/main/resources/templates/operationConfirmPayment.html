@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="layout">
+<head>
+    <title>Bet24 - home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+    <h1>Confirm payment</h1>
+
+
+    <div th:if="${session.user_id != null}">
+
+        <h2>Your cart:</h2>
+
+        <div th:if="${ #lists.isEmpty(session.cartOfBets)}">
+            <p>Cart is empty</p>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(session.cartOfBets)}">
+            <table >
+                <th>
+                <td>Game</td>
+                <td>Bet type</td>
+                <td>Odds</td>
+                <td>Stake</td>
+                <td>To win</td>
+                </th>
+                <tr th:each="bet,iter : ${session.cartOfBets}">
+                    <td th:text="${iter.count}"/>
+                    <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>
+                    <td th:text="${bet.betOffer.betOfferType.name}"/>
+                    <td th:text="${bet.betOffer.odds}"/>
+                    <td th:text="${bet.stake}"/>
+                    <td th:text="${bet.stake}*${bet.betOffer.odds}"/>
+                </tr>
+            </table>
+
+            <p th:text="|Total to pay : ${totalToPay}|"></p>
+            <p th:text="|Total to win : ${totalToWin}|"></p>
+
+            <span th:if="${notEnoughMoneyError!=1}">
+                <form th:action="@{/operation/confirmPayment}" th:object="${operation}" method="post">
+                    <p><input type="submit" value="Bet now!"></p>
+                </form>
+            </span>
+
+            <span th:if="${notEnoughMoneyError==1}">
+                You have not enough money to bet.
+                <a th:href="@{/operation/add}">Recharge your account</a>
+            </span>
+
+            <p><a th:href="@{/home}">Go back home</a></p>
+        </div>
+
+        <p>------------------------------------------------</p>
+
+    </div>
+
+
+</section>
+</body>
+</html>

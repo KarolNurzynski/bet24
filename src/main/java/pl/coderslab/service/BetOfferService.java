@@ -18,4 +18,6 @@ public interface BetOfferService {
 
     public void deleteBetOffer(Long id);
 
+    List<BetOffer> findAllActiveBetOffers();
+
 }

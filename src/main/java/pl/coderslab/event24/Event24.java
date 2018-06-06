@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.coderslab.event24;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -9,9 +9,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Table(name="events")
+@Table(name="event24")
 @Data
-public class Event {
+public class Event24 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +32,6 @@ public class Event {
     private LocalDateTime startDate;
 
     private LocalTime timeLeft = LocalTime.of(1,30,0);
-
-    @OneToMany(mappedBy = "event")
-    @JsonIgnore
-    private List<BetOffer> betOffers;
-
-    @OneToMany(mappedBy = "event")
-    @JsonIgnore
-    private List<Bet> bets;
 
 
 }

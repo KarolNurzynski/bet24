@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.*;
 import pl.coderslab.service.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Validator;
 import java.util.List;
 
@@ -38,7 +40,6 @@ public class LoginController {
         model.addAttribute("user",new User());
         return "login";
     }
-
 
     /////////////////////// MODEL ATTRIBUTES //////////////////////////
 

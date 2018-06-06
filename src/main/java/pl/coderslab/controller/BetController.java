@@ -43,12 +43,13 @@ public class BetController {
     }
 
     @PostMapping("/add/{betOffer_id}")
-    public String addBet(@ModelAttribute Bet bet,
+    public String addBet(@Valid @ModelAttribute Bet bet,
+                         BindingResult result,
                          @PathVariable Long betOffer_id,
                          HttpSession sess){
-//        if (result.hasErrors()) {
-//            return "betForm";
-//        }
+        if (result.hasErrors()) {
+            return "betForm";
+        }
 
         Long user_id = (Long) sess.getAttribute("user_id");
         List<Bet> cart = (List<Bet>) sess.getAttribute("cartOfBets");
@@ -64,20 +65,9 @@ public class BetController {
 
         cart.add(bet);
 
-        List<Bet> cart2 = (List<Bet>) sess.getAttribute("cartOfBets");
-
         return "redirect:/home";
     }
 
-    @GetMapping("/add/cartOfBets")
-    public String addcartOfBets(HttpSession sess){
-        List<Bet> cartOfBets = (List<Bet>) sess.getAttribute("cartOfBets");
-        betService.saveListOfBets(cartOfBets);
-
-        cartOfBets.clear();
-        sess.setAttribute("cartOfBets",cartOfBets);
-        return "redirect:/home";
-    }
 
 
 //    @GetMapping("/show/all")

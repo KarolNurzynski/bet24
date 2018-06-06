@@ -3,6 +3,8 @@ package pl.coderslab.service;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Event;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -17,5 +19,9 @@ public interface EventService {
     public Event editEvent(Event event);
 
     public void deleteEvent(Long id);
+
+    List<Event> findAllActiveEvents();
+
+//    List<Event> updateAllActiveEvents();
 
 }

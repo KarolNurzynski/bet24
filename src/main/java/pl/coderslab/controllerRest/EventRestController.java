@@ -43,4 +43,10 @@ public class EventRestController {
     }
 
 
+    @GetMapping("/active")
+    public List<Event> listOfActiveEvents() {
+        return eventService.findAllActiveEvents();
+    }
+
+
 }

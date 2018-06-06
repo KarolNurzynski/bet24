@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="adminLayout">
 <head>
-    <title>Event manager</title>
+    <title>Edit event24 </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
         table {
@@ -18,7 +18,9 @@
 <body>
 <section layout:fragment="content">
 
-    <form th:action="@{/event/add}" th:object="${event}" method="post">
+    <h1>Edit event24: </h1>
+
+    <form th:action="@{'/event24/edit/'+${event24.id}}" th:object="${event24}" method="post">
 
         <p><input th:field="*{teamA}" placeholder="teamA">teamA</p>
         <p th:if="${#fields.hasErrors('teamA')}" th:errors="*{teamA}">Incorrect teamA</p>
@@ -32,34 +34,23 @@
         <p><input th:field="*{strengthB}" placeholder="strengthB">strengthB</p>
         <p th:if="${#fields.hasErrors('strengthB')}" th:errors="*{strengthB}">Incorrect strengthB</p>
 
+        <p><input th:field="*{scoreA}" placeholder="scoreA">scoreA</p>
+        <p th:if="${#fields.hasErrors('scoreA')}" th:errors="*{scoreA}">Incorrect scoreA</p>
+
+        <p><input th:field="*{scoreB}" placeholder="scoreB">scoreB</p>
+        <p th:if="${#fields.hasErrors('scoreB')}" th:errors="*{scoreB}">Incorrect scoreB</p>
+
         <p><input type='datetime' th:field="*{startDate}" placeholder="mm/dd/yy hh:mm PM">startDate(np. 6/23/18 5:54 PM)</p>
         <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>
 
+        <p><input th:field="*{timeLeft}" placeholder="hh:mm AM">timeLeft(np. 1:20 AM)</p>
+        <p th:if="${#fields.hasErrors('timeLeft')}" th:errors="*{timeLeft}">Incorrect timeLeft</p>
+
+        <input type="hidden" th:field="*{id}" />
 
         <p><input type="submit" value="submit"></p>
 
     </form>
-
-    <h1>All events: </h1>
-
-    <table>
-        <th>
-        <td>Team A</td>
-        <td>Team B</td>
-        <td>Edit</td>
-        <td>Delete</td>
-        </th>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}"/>
-            <td th:text="${event.teamA}"/>
-            <td th:text="${event.teamB}"/>
-            <td><a th:href="@{'/event/edit/'+${event.id}}">edit</a></td>
-            <td><a th:href="@{'/event/delete/'+${event.id}}">delete</a></td>
-
-
-        </tr>
-
-    </table>
 
 </section>
 </body>

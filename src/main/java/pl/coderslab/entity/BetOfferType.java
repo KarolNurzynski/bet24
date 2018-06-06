@@ -1,5 +1,6 @@
 package pl.coderslab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class BetOfferType {
     private String name;
 
     @OneToMany(mappedBy = "betOfferType")
+    @JsonIgnore
     private List<BetOffer> betOffers;
 
 }

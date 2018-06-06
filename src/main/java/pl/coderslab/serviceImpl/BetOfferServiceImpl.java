@@ -38,4 +38,8 @@ public class BetOfferServiceImpl implements BetOfferService {
         betOfferRepository.deleteById(id);
     }
 
+    public List<BetOffer> findAllActiveBetOffers() {
+        return betOfferRepository.findAllByFinishedIsNullAndPublishedIsNotNull();
+    }
+
 }
