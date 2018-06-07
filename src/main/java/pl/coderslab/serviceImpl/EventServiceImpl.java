@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
     }
 
     public List<Event> findAllActiveEvents() {
-        return eventRepository.findAllByTimeLeftIsBefore(LocalTime.of(0,0,5));
+        return eventRepository.findAllByTimeLeftIsAfter(LocalTime.of(0,0,0));
     }
 
 

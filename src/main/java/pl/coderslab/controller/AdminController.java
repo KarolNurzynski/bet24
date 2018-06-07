@@ -15,4 +15,9 @@ public class AdminController {
         return "admin";
     }
 
+    @GetMapping("/live")
+    public String adminLivePage() {
+        return "liveResults";
+    }
+
 }

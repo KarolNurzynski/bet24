@@ -96,6 +96,13 @@ public class OperationController {
         Long user_id = (Long) sess.getAttribute("user_id");
         User user = userService.findUserById(user_id);
         BigDecimal onAccount = operationService.getSumOfAllOperationsValueByUserId(user_id);
+
+        if (user.getAccounts()==null) {
+            return "redirect:/account/add";
+        } else if (onAccount==null) {
+            return "redirect:/operation/add";
+        }
+
         if (onAccount.compareTo(totalToPay)==-1) {
             model.addAttribute("notEnoughMoneyError",1);
             return "operationConfirmPayment";

@@ -2,7 +2,10 @@ package pl.coderslab.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.coderslab.dto.LiveEventDto;
 import pl.coderslab.entity.Event;
+
+import java.util.List;
 
 @Service
 public class JmsClientServiceImpl implements JmsClientService {
@@ -24,12 +27,22 @@ public class JmsClientServiceImpl implements JmsClientService {
     }
 
     @Override
-    public void sendEvent(Event event) {
+    public void sendEvent(LiveEventDto event) {
         jmsProducer.sendEvent(event);
     }
 
     @Override
-    public Event receiveEvent() {
+    public LiveEventDto receiveEvent() {
         return jmsConsumer.receiveEvent();
+    }
+
+    @Override
+    public void sendEvents(List<LiveEventDto> events) {
+        jmsProducer.sendEvents(events);
+    }
+
+    @Override
+    public List<LiveEventDto> receiveEvents() {
+        return jmsConsumer.receiveEvents();
     }
 }

@@ -22,12 +22,12 @@ public interface BetOfferService {
 
     BetOffer findFirstByEvent_IdAndBetOfferType_Id(Long eventId, Long betOfferTypeId);
 
-    List<BetOffer> changeAllBetOffersToFinishedByEventId(Long event_id);
+    void changeAllBetOffersToFinishedByEventId(Long event_id);
 
     List<BetOffer> findAllActiveBetOffersByEvent_Id(Long eventId);
 
-    List<BetOffer> generateOrUpdateBetOffersBasedOnEventId(Long eventId);
+    List<BetOffer> saveOrUpdateBetOffersBasedOnEventId(Long eventId);
 
-
+    List<BetOffer> findAllFinishedBetOffers();
 
 }

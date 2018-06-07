@@ -24,4 +24,8 @@ public interface BetService {
 
     public List<Bet> findAllBetsByUserId(Long id);
 
+    public List<Bet> findAllUnpaidFinishedBets();
+
+    public List<Bet> findAllPaidFinishedBets();
+
 }

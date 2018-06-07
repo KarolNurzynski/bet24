@@ -56,6 +56,7 @@ public class BetController {
 
         BetOffer betOffer= betOfferService.findBetOfferById(betOffer_id);
         Event event = betOffer.getEvent();
+
         User user = userService.findUserById(user_id);
 
         bet.setBetOffer(betOffer);

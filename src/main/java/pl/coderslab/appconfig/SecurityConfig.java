@@ -1,4 +1,4 @@
-package pl.coderslab.app;
+package pl.coderslab.appconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import pl.coderslab.app.SpringDataUserDetailsService;
 
 @Configuration
 @EnableWebSecurity

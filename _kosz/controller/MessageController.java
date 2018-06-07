@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.coderslab.entity.Event;
 import pl.coderslab.jms.service.MessageService;
+import pl.coderslab.service.EventService;
 
 @RestController
 class MessageController {
 	
 	@Autowired
 	private MessageService messageService;
-	
-	private final List<String> teams = Arrays.asList("Real", "Barcelona", "Legia", "Rakieta Skarżysko");
+
+	@Autowired
+    EventService eventService;
 	
 	@PostMapping(path = "/queue/{queueName}")
 	ResponseEntity<?> sendPointToPointMessage(
@@ -52,65 +55,6 @@ class MessageController {
 		
 		return messages;
 	}
-	
-	class Match {
-		
-		private String team1;
-		private String team2;
-		
-		private byte point1;
-		private byte point2;
-		
-		public Match(String team1, String team2, byte point1, byte point2) {
-			this.team1 = team1;
-			this.team2 = team2;
-			this.point1 = point1;
-			this.point2 = point2;
-		}
-
-		public String getTeam1() {
-			return team1;
-		}
-
-		public String getTeam2() {
-			return team2;
-		}
-
-		public byte getPoint1() {
-			return point1;
-		}
-
-		public byte getPoint2() {
-			return point2;
-		}
-	}
-
-    @GetMapping(path = "/matches2")
-    List<Match> matches2() {
-
-	    List<Match> matchList = new ArrayList<>();
-
-	    for (int i=0; i<3; i++) {
-            final Random random = new Random();
-
-            int team1 = random.nextInt(4);
-            int team2;
-
-            while(true) {
-                team2 = random.nextInt(4);
-                if(team2 != team1) {
-                    break;
-                }
-            }
-
-            int point1 = random.nextInt(10);
-            int point2 = random.nextInt(10);
-
-            matchList.add(new Match(teams.get(team1), teams.get(team2), (byte)point1, (byte)point2));
-        }
-
-        return matchList;
-    }
 	
 	/*@PostMapping(path = "/topic/{topicName}")
 	ResponseEntity<?> sendPublishSubscribeMessage(

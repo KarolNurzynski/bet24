@@ -15,6 +15,15 @@
             border: 1px solid black;
         }
     </style>
+
+    <script type="text/javascript">
+
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 3000);
+
+    </script>
+
 </head>
 <body>
 
@@ -65,19 +74,28 @@
             <table>
                 <th>
                 <td>Team A</td>
+                <td>Score A</td>
                 <td>Team B</td>
+                <td>Score B</td>
+                <td>Start date</td>
+                <td>Time to end</td>
                 </th>
                 <tr th:each="event : ${events}">
                     <td th:text="${event.id}"/>
                     <td th:text="${event.teamA}"/>
+                    <td th:text="${event.scoreA}"/>
                     <td th:text="${event.teamB}"/>
-
-
+                    <td th:text="${event.scoreB}"/>
+                    <td th:text="${event.startDate}"/>
+                    <td th:text="${event.timeLeft}"/>
                 </tr>
 
             </table>
 
         </div>
+
+        <p><a th:href="@{'/admin/live'}">See live results (by js)</a></p>
+
         <p>------------------------------------------------</p>
 
     </div>
@@ -96,19 +114,26 @@
 
             <table>
                 <th>
+                <td>Game</td>
                 <td>Type</td>
                 <td>Odds</td>
-                <td>Add to cart</td>
+                <td th:if="${session.user_id != null}">Add to cart</td>
+
                 </th>
                 <tr th:each="betOffer : ${betOffers}">
                     <td th:text="${betOffer.id}"/>
+                    <td th:text="|${betOffer.event.teamA} (${betOffer.event.scoreA}) : ${betOffer.event.teamA} (${betOffer.event.scoreB})|"/>
                     <td th:text="${betOffer.betOfferType.name}"/>
                     <td th:text="${betOffer.odds}"/>
-                    <td><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
+                    <td th:if="${session.user_id != null}"><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
                 </tr>
 
             </table>
 
+        </div>
+
+        <div th:if="${session.user_id == null}">
+            <a th:href="@{'/login/'}">Log in to place a bet</a>
         </div>
 
         <p>------------------------------------------------</p>

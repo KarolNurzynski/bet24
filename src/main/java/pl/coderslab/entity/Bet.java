@@ -22,6 +22,8 @@ public class Bet {
 
     private LocalDateTime timeEnd;
 
+    private int paidStatus = 0; //0 = not paid; 1 = already paid
+
     @ManyToOne
     @JoinColumn(name = "betOffer_id")
     private BetOffer betOffer;

@@ -2,10 +2,13 @@ package pl.coderslab.controllerRest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.dto.LiveEventDto;
 import pl.coderslab.entity.Event;
 import pl.coderslab.service.EventService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,10 +27,9 @@ public class EventRestController {
     public Event getEventById(@PathVariable Long id) {
         return eventService.findEventById(id);
     }
-    
+
     @PostMapping("/")
-    public void addEvent(@RequestBody Event event)
-    {
+    public void addEvent(@RequestBody Event event) {
         eventService.saveEvent(event);
     }
 
@@ -48,5 +50,20 @@ public class EventRestController {
         return eventService.findAllActiveEvents();
     }
 
+    @GetMapping(path = "/live")
+
+    List<LiveEventDto> showActiveLiveEvents() {
+
+        List<LiveEventDto> listOfLiveEvents = new ArrayList<>();
+
+        List<Event> events = eventService.findAllActiveEvents();
+
+        for (Event event : events) {
+            listOfLiveEvents.add(new LiveEventDto(event.getTeamA(), (byte) event.getScoreA(), event.getTeamB(), (byte) event.getScoreB()));
+        }
+
+        return listOfLiveEvents;
+
+    }
 
 }

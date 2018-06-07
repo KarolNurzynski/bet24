@@ -50,4 +50,14 @@ public class BetServiceImpl implements BetService {
         return betRepository.findAllByUserId(id);
     }
 
+    @Override
+    public List<Bet> findAllUnpaidFinishedBets() {
+        return betRepository.findAllByTimeEndIsNotNullAndPaidStatusEquals(0);
+    }
+
+    @Override
+    public List<Bet> findAllPaidFinishedBets() {
+        return betRepository.findAllByTimeEndIsNotNullAndPaidStatusEquals(1);
+    }
+
 }

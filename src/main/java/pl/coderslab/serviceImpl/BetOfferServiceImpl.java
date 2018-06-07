@@ -61,13 +61,12 @@ public class BetOfferServiceImpl implements BetOfferService {
     }
 
     @Override
-    public List<BetOffer> changeAllBetOffersToFinishedByEventId(Long event_id) {
+    public void changeAllBetOffersToFinishedByEventId(Long event_id) {
         List<BetOffer> betOffers = betOfferRepository.findAllByEvent_IdAndFinishedIsNullAndPublishedIsNotNull(event_id);
         for (BetOffer betOffer : betOffers) {
             betOffer.setFinished(LocalDateTime.now());
             betOfferRepository.save(betOffer);
         }
-        return null;
     }
 
     @Override
@@ -76,7 +75,7 @@ public class BetOfferServiceImpl implements BetOfferService {
     }
 
     @Override
-    public List<BetOffer> generateOrUpdateBetOffersBasedOnEventId(Long eventId) {
+    public List<BetOffer> saveOrUpdateBetOffersBasedOnEventId(Long eventId) {
 
         Event event = eventService.findEventById(eventId);
 
@@ -90,7 +89,14 @@ public class BetOfferServiceImpl implements BetOfferService {
 
         List<BetOffer> newBetOffers = oddsService.generateAllBetOffersFromEventInclTimeAndCurrentResult(eventId, timeToEndRatio, scoreA, scoreB);
 
-        return newBetOffers;
+        return betOfferRepository.saveAll(newBetOffers);
+    }
+
+    @Override
+    public List<BetOffer> findAllFinishedBetOffers() {
+
+        return betOfferRepository.findAllByFinishedIsNotNull();
+
     }
 
 }

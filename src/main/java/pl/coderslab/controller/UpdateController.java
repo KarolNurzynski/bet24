@@ -17,7 +17,8 @@ import pl.coderslab.service.EventService;
 import pl.coderslab.service.UserService;
 import pl.coderslab.serviceImpl.OddsServiceImpl;
 
-import java.time.LocalTime;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,7 +52,22 @@ public class UpdateController {
     @GetMapping("/newBetOffers/{event_id}")
     public List<BetOffer> addThreeNewBetOffers(@PathVariable Long event_id){
 
-        return betOfferService.generateOrUpdateBetOffersBasedOnEventId(event_id);
+        return betOfferService.saveOrUpdateBetOffersBasedOnEventId(event_id);
+    }
+
+    @GetMapping("/generateAllBetOffers")
+    public List<BetOffer> generateAllBetOffers(){
+
+        List<Event> events = eventService.findAllActiveEvents();
+
+        List<BetOffer> allBetOffers = new ArrayList<>();
+
+        for (Event event:events) {
+            List<BetOffer> betOffers = betOfferService.saveOrUpdateBetOffersBasedOnEventId(event.getId());
+            allBetOffers.addAll(betOffers);
+        }
+
+        return allBetOffers;
     }
 
 }
