@@ -28,4 +28,6 @@ public interface BetService {
 
     public List<Bet> findAllPaidFinishedBets();
 
+    public List<Bet> findAllBetsByEventId(Long event_id);
+
 }

@@ -1,11 +1,9 @@
 package pl.coderslab.thread;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.coderslab.jms.JmsProducer;
+import pl.coderslab.thread.jms.JmsProducer;
 
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @Service

@@ -75,7 +75,6 @@ public class HomeController {
 
 
         List<Bet> activeUserBets = betService.findAllActiveBetsByUserId(user_id);
-
         model.addAttribute("activeUserBets", activeUserBets);
         model.addAttribute("user", new User());
         return "homeView";
@@ -114,32 +113,21 @@ public class HomeController {
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////
 
-    @ModelAttribute("events")
-    public List<Event> events() {
-        return eventService.findAllEvents();
-    }
-
-    @ModelAttribute("bets")
-    public List<Bet> bets() {
-        return betService.findAllBets();
-    }
-
-    @ModelAttribute("events")
-    public List<Event> allEvents() {
-        return eventService.findAllEvents();
-    }
-
     @ModelAttribute("betOfferTypes")
     public List<BetOfferType> allBetOfferTypes() {
         return betOfferTypeService.findAllBetOfferTypes();
     }
-
 
     /////////////////////////    NOT STANDARD MODEL ATTRIBUTES   /////////////////////////////////
 
     @ModelAttribute("betOffers")
     public List<BetOffer> allBetOffers() {
         return betOfferService.findAllActiveBetOffers();
+    }
+
+    @ModelAttribute("events")
+    public List<Event> events() {
+        return eventService.findAllActiveEvents();
     }
 
 

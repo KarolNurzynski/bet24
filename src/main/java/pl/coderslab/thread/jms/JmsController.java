@@ -1,7 +1,6 @@
-package pl.coderslab.jms;
+package pl.coderslab.thread.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +8,6 @@ import pl.coderslab.dto.LiveEventDto;
 import pl.coderslab.entity.Event;
 import pl.coderslab.service.EventService;
 
-import javax.jms.ObjectMessage;
 import java.util.ArrayList;
 import java.util.List;
 

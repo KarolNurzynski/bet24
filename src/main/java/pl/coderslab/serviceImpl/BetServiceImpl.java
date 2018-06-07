@@ -60,4 +60,9 @@ public class BetServiceImpl implements BetService {
         return betRepository.findAllByTimeEndIsNotNullAndPaidStatusEquals(1);
     }
 
+    @Override
+    public List<Bet> findAllBetsByEventId(Long event_id) {
+        return betRepository.findAllByEventId(event_id);
+    }
+
 }

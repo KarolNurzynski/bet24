@@ -22,6 +22,8 @@ public interface EventService {
 
     List<Event> findAllActiveEvents();
 
-//    List<Event> updateAllActiveEvents();
+    List<Event> findAllFinishedEvents();
+
+    List<Event> findAllEventsWithNotEndedBets();
 
 }

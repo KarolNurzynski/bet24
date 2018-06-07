@@ -14,4 +14,6 @@ public interface BetRepository extends JpaRepository<Bet,Long> {
 
     List<Bet> findAllByTimeEndIsNotNullAndPaidStatusEquals(int paidStatus);
 
+    List<Bet> findAllByEventId(Long eventId);
+
 }

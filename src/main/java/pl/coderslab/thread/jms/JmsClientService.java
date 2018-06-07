@@ -1,7 +1,6 @@
-package pl.coderslab.jms;
+package pl.coderslab.thread.jms;
 
 import pl.coderslab.dto.LiveEventDto;
-import pl.coderslab.entity.Event;
 
 import java.util.List;
 

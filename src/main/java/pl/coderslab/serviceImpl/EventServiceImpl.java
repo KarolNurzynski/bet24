@@ -46,11 +46,13 @@ public class EventServiceImpl implements EventService {
     }
 
 
+    public List<Event> findAllFinishedEvents() {
+        return eventRepository.findAllByTimeLeftEquals(LocalTime.of(0,0,0));
+    }
 
-//    @Scheduled(fixedRate = 1000)
-//    public List<Event> updateAllActiveEvents() {
-//        return null;
-//    }
+    public List<Event> findAllEventsWithNotEndedBets() {
+        return eventRepository.findAllEventsWithNotEndedBets();
+    }
 
 
 }

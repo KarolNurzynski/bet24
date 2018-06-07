@@ -1,9 +1,8 @@
-package pl.coderslab.jms;
+package pl.coderslab.thread.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dto.LiveEventDto;
-import pl.coderslab.entity.Event;
 
 import java.util.List;
 

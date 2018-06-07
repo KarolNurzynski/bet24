@@ -1,4 +1,4 @@
-package pl.coderslab.jms.service;
+package pl.coderslab.thread.jms.service;
 
 public interface MessageService {
 
