@@ -5,6 +5,9 @@ import pl.coderslab.entity.Account;
 
 import java.util.List;
 
+/**
+ * Interface with CRUD methods for actions on database table accounts. All methods names are very descriptive.
+ */
 @Service
 public interface AccountService {
 

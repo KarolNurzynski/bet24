@@ -11,6 +11,9 @@ import pl.coderslab.service.BetOfferTypeService;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller with entry points performing basic CRUD operations on bet offer types
+ */
 @Controller
 @RequestMapping("/betOfferType")
 public class BetOfferTypeController {

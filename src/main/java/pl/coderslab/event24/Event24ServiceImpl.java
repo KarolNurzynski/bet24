@@ -1,4 +1,4 @@
-package pl.coderslab.event2424;
+package pl.coderslab.event24;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,9 @@ import pl.coderslab.event24.Event24Service;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Service providing methods to perform basic CRUD operations on events table (faking external data provider)
+ */
 @Service
 public class Event24ServiceImpl implements Event24Service {
 
@@ -40,13 +43,7 @@ public class Event24ServiceImpl implements Event24Service {
     }
 
     public List<Event24> findAllActiveEvent24() {
-        return event24Repository.findAllByTimeLeftIsBefore(LocalTime.of(0,0,5));
+        return event24Repository.findAllByTimeLeftIsAfter(LocalTime.of(0,0,5));
     }
-
-//    @Scheduled(fixedRate = 1000)
-//    public List<Event24> updateAllActiveEvent24() {
-//        return null;
-//    }
-
 
 }

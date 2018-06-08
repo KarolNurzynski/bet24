@@ -11,6 +11,9 @@ import pl.coderslab.service.EventService;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller with entry points performing basic CRUD operations on events
+ */
 @Controller
 @RequestMapping("/event")
 public class EventController {

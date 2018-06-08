@@ -9,6 +9,9 @@ import pl.coderslab.service.OperationService;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Service with CRUD methods for actions on database table operations. All methods names are very descriptive.
+ */
 @Service
 public class OperationServiceImpl implements OperationService {
 

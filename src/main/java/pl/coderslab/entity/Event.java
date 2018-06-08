@@ -1,6 +1,7 @@
 package pl.coderslab.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,6 +9,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Entity representing data stored in table events in the bet24 database.
+ * Also used by Hibernate to build database and sql relations.
+ *
+ * This entity represents an event - football match
+ */
 @Entity
 @Table(name="events")
 @Data

@@ -11,15 +11,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import java.util.Arrays;
 
+/**
+ * Spring configuration class with view controllers and CORS mapping
+ */
 @Configuration
 @EnableWebMvc
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
-    // DIRECT ACTIONS: URL->VIEW
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/logout").setViewName("logoutView");
-//        registry.addViewController("/login").setViewName("admin/login");
         registry.addViewController("/403").setViewName("403");
     }
 

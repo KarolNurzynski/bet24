@@ -8,6 +8,9 @@ import pl.coderslab.service.UserService;
 
 import java.util.List;
 
+/**
+ * REST controller prodviding external users with basic CRUD operations on users. No security provided.
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {

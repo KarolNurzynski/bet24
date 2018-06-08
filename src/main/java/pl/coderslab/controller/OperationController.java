@@ -20,6 +20,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Controller which maps urls responsible for managing basic CRUD operations on operation
+ */
 @Controller
 @RequestMapping("/operation")
 public class OperationController {
@@ -146,12 +149,7 @@ public class OperationController {
             cartOfBets.clear();
             sess.setAttribute("cartOfBets",cartOfBets);
         }
-//
-//
-//        betService.saveListOfBets(cartOfBets);
-//
-//        cartOfBets.clear();
-//        sess.setAttribute("cartOfBets",cartOfBets);
+
         return "redirect:/home";
     }
 

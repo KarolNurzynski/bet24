@@ -11,6 +11,13 @@ import javax.validation.groups.Default;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Entity representing data stored in table users in the bet24 database.
+ * Also used by Hibernate to build database and sql relations.
+ *
+ * This entity represents a user (client) but at the same time is used
+ * by Spring Security together with {@link Role} entity
+ */
 @Entity
 @Table(name="users")
 @Data

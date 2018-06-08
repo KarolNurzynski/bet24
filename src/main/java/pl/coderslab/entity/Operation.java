@@ -7,6 +7,12 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Entity representing data stored in table operations in the bet24 database.
+ * Also used by Hibernate to build database and sql relations.
+ *
+ * This entity represents oparation made on client account.
+ */
 @Entity
 @Table(name="operations")
 @Data

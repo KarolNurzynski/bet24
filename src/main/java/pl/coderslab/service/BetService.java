@@ -5,6 +5,10 @@ import pl.coderslab.entity.Bet;
 
 import java.util.List;
 
+
+/**
+ * Interface with CRUD methods for actions on database table bets. All methods names are very descriptive.
+ */
 @Service
 public interface BetService {
 

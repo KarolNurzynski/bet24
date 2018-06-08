@@ -34,20 +34,6 @@ public class UpdateController {
     @Autowired
     OddsServiceImpl oddsService;
 
-    @GetMapping("/newBetOffer")
-    public BetOffer addNewBetOffer(){
-
-        BetOffer betOffer = oddsService.generateBetOfferFromEvent(1L, 1);
-        return betOffer;
-    }
-
-//    @GetMapping("/newBetOffers/{event_id}")
-//    public List<BetOffer> addThreeNewBetOffers(@PathVariable Long event_id){
-//
-//        List<BetOffer> newBetOffers = oddsService.generateAllBetOffersFromEvent(event_id);
-//
-//        return newBetOffers;
-//    }
 
     @GetMapping("/newBetOffers/{event_id}")
     public List<BetOffer> addThreeNewBetOffers(@PathVariable Long event_id){

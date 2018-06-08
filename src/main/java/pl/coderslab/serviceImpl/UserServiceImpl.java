@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Service with CRUD methods for actions on database table users. All methods names are very descriptive.
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

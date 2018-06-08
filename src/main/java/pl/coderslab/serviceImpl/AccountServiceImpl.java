@@ -10,6 +10,10 @@ import pl.coderslab.service.AccountService;
 
 import java.util.List;
 
+
+/**
+ * Service with CRUD methods for actions on database table accounts. All methods names are very descriptive.
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 

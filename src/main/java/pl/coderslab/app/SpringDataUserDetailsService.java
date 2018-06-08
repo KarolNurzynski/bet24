@@ -13,6 +13,10 @@ import pl.coderslab.service.UserService;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * {@link SpringDataUserDetailsService} implements {@link UserDetailsService} interface
+ * overriding its loadUserByUsername method as to return custom {@link CurrentUser} class
+ */
 public class SpringDataUserDetailsService implements UserDetailsService {
 
     private UserService userServiceImpl;

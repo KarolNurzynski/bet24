@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Service with CRUD methods for actions on database table bet_offers. All methods names are very descriptive.
+ */
 @Service
 public class BetOfferServiceImpl implements BetOfferService {
 
@@ -75,7 +78,7 @@ public class BetOfferServiceImpl implements BetOfferService {
     }
 
     @Override
-    public List<BetOffer> saveOrUpdateBetOffersBasedOnEventId(Long eventId) {
+    public List<BetOffer> generateAndUpdateBetOffersIncludingOddsBasedOnEventId(Long eventId) {
 
         Event event = eventService.findEventById(eventId);
 

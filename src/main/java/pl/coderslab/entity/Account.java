@@ -8,6 +8,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity representing data stored in table accounts in the bet24 database.
+ * Also used by Hibernate to build database and sql relations.
+ * This entity is representing clinet acount with its number.
+ */
 @Entity
 @Table(name="accounts")
 @Data
@@ -23,9 +28,6 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Operation> operations;
-
-//    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
-//    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="user_id")

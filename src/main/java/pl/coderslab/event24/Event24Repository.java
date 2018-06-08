@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface Event24Repository extends JpaRepository<Event24,Long> {
 
-    List<Event24> findAllByTimeLeftIsBefore(LocalTime timeLeft);
+    List<Event24> findAllByTimeLeftIsAfter(LocalTime timeLeft);
 
 }

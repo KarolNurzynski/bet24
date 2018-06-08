@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Interface providing methods to perform basic CRUD operations on events table (faking external data provider)
+ */
 @Service
 public interface Event24Service {
 
@@ -19,6 +22,5 @@ public interface Event24Service {
 
     List<Event24> findAllActiveEvent24();
 
-//    List<Event24> updateAllActiveEvent24();
 
 }

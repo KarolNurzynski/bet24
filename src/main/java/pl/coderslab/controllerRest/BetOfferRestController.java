@@ -8,6 +8,9 @@ import pl.coderslab.service.BetOfferService;
 
 import java.util.List;
 
+/**
+ * REST controller prodviding external users with basic CRUD operations on bet offers. No security provided.
+ */
 @RestController
 @RequestMapping("/api/betOffers")
 public class BetOfferRestController {

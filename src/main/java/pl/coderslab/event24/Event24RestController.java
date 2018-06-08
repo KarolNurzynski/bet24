@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Rest controller of external data provider (live events data)
+ */
 @RestController
 @RequestMapping("/api/event24")
 public class Event24RestController {

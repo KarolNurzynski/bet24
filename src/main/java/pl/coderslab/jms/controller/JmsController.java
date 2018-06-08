@@ -1,4 +1,4 @@
-package pl.coderslab.thread.jms;
+package pl.coderslab.jms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,11 +6,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.coderslab.dto.LiveEventDto;
 import pl.coderslab.entity.Event;
+import pl.coderslab.jms.service.JmsClientService;
 import pl.coderslab.service.EventService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller which enables sending of JMS messages through actions on url addresses.
+ * Currently not in use due to other data type sent through queue.
+ */
 @RestController
 public class JmsController {
 

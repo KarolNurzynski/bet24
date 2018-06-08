@@ -1,4 +1,4 @@
-package pl.coderslab.thread.jms.controller;
+package pl.coderslab.jms.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.coderslab.entity.Event;
-import pl.coderslab.thread.jms.service.MessageService;
+import pl.coderslab.jms.service.MessageService;
 import pl.coderslab.service.EventService;
 
 @RestController

@@ -5,6 +5,9 @@ import pl.coderslab.entity.BetOfferType;
 
 import java.util.List;
 
+/**
+ * Interface with CRUD methods for actions on database table bet_offer_types. All methods names are very descriptive.
+ */
 @Service
 public interface BetOfferTypeService {
 

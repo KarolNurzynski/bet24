@@ -8,6 +8,9 @@ import pl.coderslab.service.BetService;
 
 import java.util.List;
 
+/**
+ * Service with CRUD methods for actions on database table bets. All methods names are very descriptive.
+ */
 @Service
 public class BetServiceImpl implements BetService {
     

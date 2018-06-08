@@ -2,9 +2,12 @@ package pl.coderslab.dto;
 
 import java.io.Serializable;
 
+/**
+ * Class used form transfering data from {@link pl.coderslab.entity.Event} entity
+ * to javascript objects resposible for viewing live event results
+ */
 public class LiveEventDto implements Serializable {
 
-    // Ponizszy numer okresla wersje obiektu
     private static final long serialVersionUID = 1336618159361713256L;
 
     private String teamA;

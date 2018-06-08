@@ -5,6 +5,10 @@ import pl.coderslab.entity.User;
 
 import java.util.List;
 
+
+/**
+ * Interface with CRUD methods for actions on database table users. All methods names are very descriptive.
+ */
 @Service
 public interface UserService {
 

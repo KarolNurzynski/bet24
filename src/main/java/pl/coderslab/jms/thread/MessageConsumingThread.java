@@ -1,17 +1,24 @@
-package pl.coderslab.thread;
+package pl.coderslab.jms.thread;
 
+import org.aspectj.lang.annotation.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.*;
-import pl.coderslab.thread.jms.JmsConsumer;
+import pl.coderslab.jms.JmsConsumer;
 import pl.coderslab.service.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This is a process that is used to receive JMS messages.
+ * In this app JMS messages are used to send String "flags" to perform different actions
+ * depending on the flag received (see {@link MessageProducingThread} for process responsible for sending of messages).
+ *
+ */
 @Service
-public class MessageReceiver implements Runnable {
+public class MessageConsumingThread implements Runnable {
 
     @Autowired
     EventService eventService;
@@ -32,20 +39,24 @@ public class MessageReceiver implements Runnable {
     @Autowired
     JmsConsumer jmsConsumer;
 
+
     @Override
     public void run() {
         while(true) {
             String receivedMessage = jmsConsumer.receive();
 
             switch (receivedMessage) {
+
+                /**
+                 * This action updates bet offers basing on active events
+                 */
+
                 case "update-betOffers":
 
                     List<Event> activeEvents = eventService.findAllActiveEvents();
 
                     for (Event event : activeEvents) {
-
-                        betOfferService.saveOrUpdateBetOffersBasedOnEventId(event.getId());
-
+                        betOfferService.generateAndUpdateBetOffersIncludingOddsBasedOnEventId(event.getId());
                     }
 
                     break;
@@ -53,7 +64,13 @@ public class MessageReceiver implements Runnable {
 
                 case "update-prizes":
 
-                    List<Event> finishedEvents = eventService.findAllEventsWithNotEndedBets();
+                    /**
+                     * This action finds all finished events which have some bets still active (so not paid yet)
+                     * After finding these bets their active status is changed to finished ('timeend' parameter is set to current time)
+                     * Then all those bets are send for payment
+                     */
+
+                    List<Event> finishedEvents = eventService.findAllFinishedEventsWithActiveBets();
 
                     for (Event event:finishedEvents) {
                         List<Bet> betsToDeactivate = betService.findAllBetsByEventId(event.getId());

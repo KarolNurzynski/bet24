@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import pl.coderslab.thread.MessageReceiver;
-import pl.coderslab.thread.MessageSender;
+import pl.coderslab.jms.thread.MessageConsumingThread;
+import pl.coderslab.jms.thread.MessageProducingThread;
 
 @SpringBootApplication
 @EnableScheduling
@@ -15,14 +15,12 @@ public class Bet24Application {
 
     public static void main(String[] args) {
 
-//        SpringApplication.run(Bet24Application.class, args);
-
         ConfigurableApplicationContext context = SpringApplication.run(Bet24Application.class, args);
 
-        Thread messageSender1 = new Thread(context.getBean( MessageSender.class ));
+        Thread messageSender1 = new Thread(context.getBean( MessageProducingThread.class ));
         messageSender1.start();
 
-        Thread messageReceiver1 = new Thread(context.getBean( MessageReceiver.class ));
+        Thread messageReceiver1 = new Thread(context.getBean( MessageConsumingThread.class ));
         messageReceiver1.start();
 
     }

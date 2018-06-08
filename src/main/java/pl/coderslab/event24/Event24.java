@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * This entity is used for faking external service database,
+ * which provides our app with data sent in JSON
+ */
 @Entity
 @Table(name="event24")
 @Data

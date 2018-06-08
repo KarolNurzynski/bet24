@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller with entry points performing basic CRUD operations on bets
+ */
 @Controller
 @RequestMapping("/bet")
 public class BetController {
@@ -68,42 +71,6 @@ public class BetController {
 
         return "redirect:/home";
     }
-
-
-
-//    @GetMapping("/show/all")
-//    public String showAllBets(Model model) {
-//        return "betListAll";
-//    }
-//
-//    @GetMapping("/show/{bet_id")
-//    public String showBet(@PathVariable Long bet_id, Model model) {
-//        model.addAttribute(betService.findBetById(bet_id));
-//        return "betShow";
-//    }
-
-
-//    @GetMapping("/edit/{bet_id}")
-//    public String editBet(@PathVariable Long bet_id, Model model) {
-//        Bet bet = betService.findBetById(bet_id);
-//        model.addAttribute("bet",bet);
-//        return "betEditForm";
-//    }
-//
-//    @PostMapping("/edit/{bet_id}")
-//    public String editBet(@ModelAttribute Bet bet,
-//                           @PathVariable Long bet_id,
-//                           Model model) {
-//        bet.setId(bet_id);
-//        betService.editBet(bet);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/delete/{bet_id}")
-//    public String deleteBet(@PathVariable Long bet_id, Model model) {
-//        betService.deleteBet(bet_id);
-//        return "redirect:/";
-//    }
 
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////

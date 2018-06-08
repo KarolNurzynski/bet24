@@ -14,6 +14,9 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Controller with entry points performing basic CRUD operations on bet offers
+ */
 @Controller
 @RequestMapping("/betOffer")
 public class BetOfferController {

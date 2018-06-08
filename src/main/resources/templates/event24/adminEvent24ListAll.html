@@ -43,12 +43,13 @@
     <h1>All event24: </h1>
 
     <table>
-        <th>
-        <td>Team A</td>
-        <td>Team B</td>
-        <td>Edit</td>
-        <td>Delete</td>
-        </th>
+        <tr>
+            <th>Event id</th>
+            <th>Team A</th>
+            <th>Team B</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
         <tr th:each="event24 : ${event24s}">
             <td th:text="${event24.id}"/>
             <td th:text="${event24.teamA}"/>

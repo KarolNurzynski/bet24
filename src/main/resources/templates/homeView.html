@@ -116,13 +116,16 @@
             <table th:each="event : ${events}">
 
                 <tr>
-                    <th colspan="5" th:text="|Game no ${event.id} : ${event.teamA} vs ${event.teamB}|"></th>
+                    <th colspan="6" th:text="|Game no ${event.id} : ${event.teamA} vs ${event.teamB}|"></th>
+                    <th th:if="${session.user_id != null}">Cart</th>
                 </tr>
 
                 <tr>
                     <th>Game id</th>
                     <th>Game</th>
                     <th>Type</th>
+                    <th>Strength A</th>
+                    <th>Strength B</th>
                     <th>Odds</th>
                     <th>Add to cart</th>
                 </tr>
@@ -131,6 +134,8 @@
                 <tr th:each="betOffer : ${event.betOffers}">
                     <td th:text="${betOffer.id}"/>
                     <td th:text="|${betOffer.event.teamA} (${betOffer.event.scoreA}) : ${betOffer.event.teamB} (${betOffer.event.scoreB})|"/>
+                    <td th:text="${betOffer.event.strengthA}"/>
+                    <td th:text="${betOffer.event.strengthB}"/>
                     <td th:text="${betOffer.betOfferType.name}"/>
                     <td th:text="${betOffer.odds}"/>
                     <td th:if="${session.user_id != null}"><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
@@ -210,7 +215,6 @@
                 <th>To win</th>
                 </tr>
                 <tr th:each="bet,iter : ${activeUserBets}">
-                    <td th:text="${bet.event.id}"/>
                     <td th:text="${bet.id}"/>
                     <td th:text="${bet.event.id}"/>
                     <td th:text="|${bet.event.teamA} (${bet.event.scoreA}) : ${bet.event.teamB} (${bet.event.scoreB})|"/>

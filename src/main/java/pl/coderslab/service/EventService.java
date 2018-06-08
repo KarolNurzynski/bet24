@@ -1,12 +1,16 @@
 package pl.coderslab.service;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.dto.EventDto;
 import pl.coderslab.entity.Event;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Interface with CRUD methods for actions on database table events. All methods names are very descriptive.
+ */
 @Service
 public interface EventService {
 
@@ -24,6 +28,8 @@ public interface EventService {
 
     List<Event> findAllFinishedEvents();
 
-    List<Event> findAllEventsWithNotEndedBets();
+    List<Event> findAllFinishedEventsWithActiveBets();
+
+    public Event saveEventFromEventDto(EventDto eventDto);
 
 }

@@ -11,6 +11,9 @@ import pl.coderslab.event24.Event24Service;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller of data providing service (events)
+ */
 @Controller
 @RequestMapping("/event24")
 public class Event24Controller {

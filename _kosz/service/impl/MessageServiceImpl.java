@@ -1,4 +1,4 @@
-package pl.coderslab.thread.jms.service.impl;
+package pl.coderslab.jms.service.impl;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -11,7 +11,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
-import pl.coderslab.thread.jms.service.MessageService;
+import pl.coderslab.jms.service.MessageService;
 
 @Service
 public class MessageServiceImpl implements MessageService {

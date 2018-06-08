@@ -15,16 +15,15 @@ import pl.coderslab.service.UserService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+/**
+ * Controller which maps urls responsible for managing basic CRUD operations on operation
+ */
 @Controller
 public class UserController {
 
     @Autowired
     UserService userService;
 
-//    @GetMapping("/login")
-//    public String login() {
-//        return "admin/login";
-//    }
 
     @GetMapping("/user/add")
     public String addUser(Model model){

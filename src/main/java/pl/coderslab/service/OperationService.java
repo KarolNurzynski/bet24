@@ -6,6 +6,9 @@ import pl.coderslab.entity.Operation;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Interface with CRUD methods for actions on database table operations. All methods names are very descriptive.
+ */
 @Service
 public interface OperationService {
 

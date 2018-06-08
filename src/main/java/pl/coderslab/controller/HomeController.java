@@ -22,6 +22,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller which maps urls with views of home page
+ */
 @Controller
 @RequestMapping("/")
 public class HomeController {

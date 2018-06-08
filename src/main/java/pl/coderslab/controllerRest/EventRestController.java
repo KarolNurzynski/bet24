@@ -4,6 +4,7 @@ package pl.coderslab.controllerRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.dto.EventDto;
 import pl.coderslab.dto.LiveEventDto;
 import pl.coderslab.entity.Event;
 import pl.coderslab.service.EventService;
@@ -11,6 +12,9 @@ import pl.coderslab.service.EventService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * REST controller prodviding external users with basic CRUD operations on events. No security provided.
+ */
 @RestController
 @RequestMapping("/api/events")
 public class EventRestController {
@@ -29,8 +33,8 @@ public class EventRestController {
     }
 
     @PostMapping("/")
-    public void addEvent(@RequestBody Event event) {
-        eventService.saveEvent(event);
+    public void addEvent(@RequestBody EventDto event) {
+        eventService.saveEventFromEventDto(event);
     }
 
     @PutMapping("/{id}")
@@ -51,7 +55,6 @@ public class EventRestController {
     }
 
     @GetMapping(path = "/live")
-
     List<LiveEventDto> showActiveLiveEvents() {
 
         List<LiveEventDto> listOfLiveEvents = new ArrayList<>();

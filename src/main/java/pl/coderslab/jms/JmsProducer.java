@@ -1,4 +1,4 @@
-package pl.coderslab.thread.jms;
+package pl.coderslab.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +8,9 @@ import pl.coderslab.dto.LiveEventDto;
 
 import java.util.List;
 
+/**
+ * This class contains methods for sending JMS messages
+ */
 @Component
 public class JmsProducer {
 

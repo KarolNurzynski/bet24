@@ -15,11 +15,15 @@ import pl.coderslab.service.UserService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Service which uses {@link OddsCalculator} class static methods to calculate odds and generate bet offers from events
+ */
 @Service
 public class OddsServiceImpl {
 
@@ -34,13 +38,21 @@ public class OddsServiceImpl {
 
     private final OddsCalculator oddsCalculator;
 
-
-    // Check out units - odds in program are 0-100; odds in calculator 0.00-1.00
     @Autowired
     public OddsServiceImpl(OddsCalculator oddsCalculator) {
         this.oddsCalculator = oddsCalculator;
     }
 
+
+    /**
+     * This method generates bet offer based on event and type of offer to be generated (win / lose / draw).
+     *
+     * @param event_id is the id of {@link Event} entity
+     * @param offerTypeIndex is a type of offer to be generated, where 0 means team A wins, 1 - team B wins, 2 - draw
+     * @return is bet offer produced based on input information
+     *
+     * Pay attention to units transformation: odds in program are 0-100; odds in calculator 0.00-1.00
+     */
     public BetOffer generateBetOfferFromEvent(Long event_id, int offerTypeIndex) {
 
         Event event = eventService.findEventById(event_id);
@@ -67,6 +79,15 @@ public class OddsServiceImpl {
 
     }
 
+    /**
+     * This methods generate 3 types of offers (win, lose ,draw) based on event passed to it.
+     *
+     * @param event_id is the id of {@link Event} entity
+     * @return is a type of offer to be generated, where 0 means team A wins, 1 - team B wins, 2 - draw
+     * @throws NullPointerException
+     *
+     * Pay attention to units transformation: odds in program are 0-100; odds in calculator 0.00-1.00
+     */
     public List<BetOffer> generateAllBetOffersFromEvent(Long event_id) throws NullPointerException {
 
         Event event = eventService.findEventById(event_id);
@@ -114,6 +135,17 @@ public class OddsServiceImpl {
 
     }
 
+    /**
+     *
+     * @param event_id is the id of {@link Event} entity
+     * @param timeToEndRatio is the ratio between time to uend and total time - see {@link OddsCalculator#calcTimeToEndRation(LocalTime, LocalTime)}
+     * @param scoreA is number of golas scored by team A
+     * @param scoreB is number of goals scored by team B
+     * @return is a type of offer to be generated, where 0 means team A wins, 1 - team B wins, 2 - draw
+     * @throws NullPointerException
+     *
+     * Pay attention to units transformation: odds in program are 0-100; odds in calculator 0.00-1.00
+     */
     public List<BetOffer> generateAllBetOffersFromEventInclTimeAndCurrentResult (Long event_id, double timeToEndRatio, int scoreA, int scoreB) throws NullPointerException {
 
         Event event = eventService.findEventById(event_id);

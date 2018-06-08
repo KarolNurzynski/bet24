@@ -13,11 +13,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Validator;
 import java.util.List;
 
+/**
+ * Controller mapping /login url
+ */
 @Controller
 public class LoginController {
-
-//    @Autowired
-//    Validator validator;
 
     @Autowired
     BetService betService;
@@ -34,7 +34,6 @@ public class LoginController {
     @Autowired
     EventService eventService;
 
-    //all actions marked with "authenticated" in Spring Sec Config get here
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("user",new User());

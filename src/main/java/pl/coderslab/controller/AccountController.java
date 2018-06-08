@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller which manages CRUD actions on user accounts
+ */
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -86,68 +89,8 @@ public class AccountController {
         return "redirect:/account/add";
     }
 
-//    @GetMapping("/show/all")
-//    public String showAllAccounts(Model model) {
-//
-//        List<Account> accounts = accountService.findAllAccounts();
-//        model.addAttribute("accounts", accounts);
-//
-//        return "accountListAll";
-//    }
-//
-//    @GetMapping("/show/allUserAccounts")
-//    public String showAllUserAccounts(Model model,
-//                                      HttpSession sess) {
-//
-//        Long user_id = (Long) sess.getAttribute("user_id");
-//        User user = userService.findUserById(user_id);
-//
-//        List<Account> accounts = accountService.findAllAccountsByUserId(user_id);
-//        model.addAttribute("accounts", accounts);
-//
-//        return "accountListAll";
-//    }
-//
-//
-//
-//    @GetMapping("/show/{account_id}")
-//    public String showAccount(@PathVariable Long account_id, Model model) {
-//        model.addAttribute(accountService.findAccountById(account_id));
-//        return "accountShow";
-//    }
-
-//    @GetMapping("/edit/{account_id}")
-//    public String editAccount(@PathVariable Long account_id,
-//                              Model model,
-//                              HttpSession sess){
-//        Account account = accountService.findAccountByUserId(account_id);
-//        model.addAttribute("account", account);
-//        return "accountForm";
-//    }
-//
-//    @PostMapping("/edit/{account_id}")
-//    public String editAccount(@Valid @ModelAttribute Account account,
-//                             BindingResult result,
-//                             HttpSession sess){
-//        if (result.hasErrors()) {
-//            return "accountForm";
-//        }
-//        account.setActiveStatus(1);
-//        Long user_id = (Long) sess.getAttribute("user_id");
-//
-//        User user = userService.findUserById(user_id);
-//        account.setUser(user);
-//        accountService.saveAccount(account);
-//        return "redirect:/home";
-//    }
-
 
     /////////////////////////    MODEL ATTRIBUTES   /////////////////////////////////
-
-//    @ModelAttribute("accounts")
-//    public List<Account> accounts() {
-//        return accountService.findAllAccounts();
-//    }
 
     @ModelAttribute("events")
     public List<Event> events() {

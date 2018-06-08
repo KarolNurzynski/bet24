@@ -1,11 +1,17 @@
-package pl.coderslab.thread.jms;
+package pl.coderslab.jms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.dto.LiveEventDto;
+import pl.coderslab.jms.JmsConsumer;
+import pl.coderslab.jms.JmsProducer;
 
 import java.util.List;
 
+/**
+ * Service providing methods for sending and receiving JMS messages
+ * Only String message are currently in use
+ */
 @Service
 public class JmsClientServiceImpl implements JmsClientService {
 
