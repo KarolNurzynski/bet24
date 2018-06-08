@@ -29,21 +29,15 @@ public class BetRestController {
     }
     
     @PostMapping("/")
-    public void addBet(@RequestBody Bet bet)
-    {
-        betService.saveBet(bet);
+    public Bet addBet(@RequestBody Bet bet) {
+        return betService.saveBet(bet);
     }
 
     @PutMapping("/{id}")
-    public void editBet(@RequestBody Bet bet) {
-        betService.editBet(bet);
+    public Bet editBet(@RequestBody Bet bet) {
+        return betService.editBet(bet);
     }
 
-
-    @DeleteMapping("/{id}")
-    public void deleteBet(@PathVariable Long id) {
-        betService.deleteBet(id);
-    }
 
 
 }

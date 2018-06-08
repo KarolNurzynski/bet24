@@ -29,20 +29,13 @@ public class BetOfferRestController {
     }
     
     @PostMapping("/")
-    public void addBetOffer(@RequestBody BetOffer betOffer)
-    {
-        betOfferService.saveBetOffer(betOffer);
+    public BetOffer addBetOffer(@RequestBody BetOffer betOffer) {
+        return betOfferService.saveBetOffer(betOffer);
     }
 
     @PutMapping("/{id}")
-    public void editBetOffer(@RequestBody BetOffer betOffer) {
-        betOfferService.editBetOffer(betOffer);
-    }
-
-
-    @DeleteMapping("/{id}")
-    public void deleteBetOffer(@PathVariable Long id) {
-        betOfferService.deleteBetOffer(id);
+    public BetOffer editBetOffer(@RequestBody BetOffer betOffer) {
+        return betOfferService.editBetOffer(betOffer);
     }
 
 

@@ -38,14 +38,8 @@ public class EventRestController {
     }
 
     @PutMapping("/{id}")
-    public void editEvent(@RequestBody Event event) {
-        eventService.editEvent(event);
-    }
-
-
-    @DeleteMapping("/{id}")
-    public void deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
+    public Event editEvent(@RequestBody Event event) {
+        return eventService.editEvent(event);
     }
 
 

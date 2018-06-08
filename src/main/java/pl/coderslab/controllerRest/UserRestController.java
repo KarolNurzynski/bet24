@@ -29,21 +29,13 @@ public class UserRestController {
     }
 
     @PostMapping("/")
-    public void addUser(@RequestBody User user)
-    {
-        userService.saveUser(user);
+    public User addUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
     @PutMapping("/{id}")
-    public void editUser(@RequestBody User user) {
-        userService.editUser(user);
+    public User editUser(@RequestBody User user) {
+        return userService.editUser(user);
     }
-
-
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
-
 
 }

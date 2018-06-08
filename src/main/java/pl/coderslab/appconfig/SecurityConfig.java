@@ -20,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/api/*").permitAll()
                 .antMatchers("/login", "/home", "/").anonymous()
                 .antMatchers("/bet", "/logout").authenticated()
                 .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
@@ -34,10 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .deleteCookies()
                     .invalidateHttpSession(true)
-                        .logoutSuccessUrl("/home")    //overrides standard Spring logout action
-            .and()
-                .exceptionHandling()
-                    .accessDeniedPage("/403.html");
+                        .logoutSuccessUrl("/home") ;   //overrides standard Spring logout action
+//            .and()
+//                .exceptionHandling()
+//                    .accessDeniedPage("/403.html");
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
