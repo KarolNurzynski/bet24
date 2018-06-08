@@ -1,0 +1,16 @@
+pl.coderslab
+pl.coderslab.app
+pl.coderslab.appconfig
+pl.coderslab.controller
+pl.coderslab.controllerRest
+pl.coderslab.dto
+pl.coderslab.entity
+pl.coderslab.event24
+pl.coderslab.jms
+pl.coderslab.jms.controller
+pl.coderslab.jms.service
+pl.coderslab.jms.thread
+pl.coderslab.repository
+pl.coderslab.service
+pl.coderslab.serviceImpl
+pl.coderslab.validation

@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login", "/home", "/").anonymous()
                 .antMatchers("/bet", "/logout").authenticated()
+                .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/betOffer/**", "/event/**").permitAll()     // for production it will be authenticated with ADMIN_ROLE account
                 .anyRequest().permitAll()   //denyAll() - 403 access denied page

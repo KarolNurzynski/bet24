@@ -127,7 +127,7 @@
                     <th>Strength A</th>
                     <th>Strength B</th>
                     <th>Odds</th>
-                    <th>Add to cart</th>
+                    <th th:if="${session.user_id != null}">Add to cart</th>
                 </tr>
 
 
