@@ -31,8 +31,8 @@
             <p>Cart is empty</p>
         </div>
 
-        <div th:if="${not #lists.isEmpty(session.cartOfBets)}">
-            <table >
+        <div th:if="${not #lists.isEmpty(session.cartOfBets)}" class="container">
+            <table class="table table-bordered">
                 <th>
                 <td>Game</td>
                 <td>Bet type</td>
@@ -54,8 +54,8 @@
             <p th:text="|Total to win : ${totalToWin}|"></p>
 
             <span th:if="${notEnoughMoneyError!=1}">
-                <form th:action="@{/operation/confirmPayment}" th:object="${operation}" method="post">
-                    <p><input type="submit" value="Bet now!"></p>
+                <form th:action="@{/operation/confirmPayment}" th:object="${operation}" method="post" cssClass="jumbotron">
+                    <p><input type="submit" value="Bet now!" class="btn btn-success"></p>
                 </form>
             </span>
 

@@ -5,50 +5,43 @@
 <head>
     <title>Event manager</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
 
-    <form th:action="@{/event/add}" th:object="${event}" method="post">
+    <form th:action="@{/event/add}" th:object="${event}" method="post" cssClass="jumbotron">
 
-        <p><input th:field="*{teamA}" placeholder="teamA">teamA</p>
+        <p><input th:field="*{teamA}" placeholder="teamA" cssClass="form-conrol">teamA</p>
         <p th:if="${#fields.hasErrors('teamA')}" th:errors="*{teamA}">Incorrect teamA</p>
 
-        <p><input th:field="*{teamB}" placeholder="teamB">teamB</p>
+        <p><input th:field="*{teamB}" placeholder="teamB" cssClass="form-conrol">teamB</p>
         <p th:if="${#fields.hasErrors('teamB')}" th:errors="*{teamB}">Incorrect teamB</p>
 
-        <p><input th:field="*{strengthA}" placeholder="strengthA">strengthA</p>
+        <p><input th:field="*{strengthA}" placeholder="strengthA" cssClass="form-conrol">strengthA</p>
         <p th:if="${#fields.hasErrors('strengthA')}" th:errors="*{strengthA}">Incorrect strengthA</p>
 
-        <p><input th:field="*{strengthB}" placeholder="strengthB">strengthB</p>
+        <p><input th:field="*{strengthB}" placeholder="strengthB" cssClass="form-conrol">strengthB</p>
         <p th:if="${#fields.hasErrors('strengthB')}" th:errors="*{strengthB}">Incorrect strengthB</p>
 
-        <p><input type='datetime' th:field="*{startDate}" placeholder="mm/dd/yy hh:mm PM">startDate(np. 6/23/18 5:54 PM)</p>
+        <p><input type='datetime' th:field="*{startDate}" placeholder="mm/dd/yy hh:mm PM" cssClass="form-conrol">startDate(np. 6/23/18 5:54 PM)</p>
         <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>
 
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 
+<div class="container">
     <h1>All events: </h1>
 
-    <table>
+    <table class="table table-bordered">
         <tr>
-        <th>Event id</th>
-        <th>Team A</th>
-        <th>Team B</th>
-        <th>Edit</th>
-        <th>Delete</th>
+            <th>Event id</th>
+            <th>Team A</th>
+            <th>Team B</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <tr th:each="event : ${events}">
             <td th:text="${event.id}"/>
@@ -61,6 +54,7 @@
         </tr>
 
     </table>
+</div>
 
 </section>
 </body>

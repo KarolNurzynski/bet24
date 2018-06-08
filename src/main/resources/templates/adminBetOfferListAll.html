@@ -5,44 +5,39 @@
 <head>
     <title>Bet offer manager</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
 
-    <form th:action="@{/betOffer/add}" th:object="${betOffer}" method="post">
+    <form th:action="@{/betOffer/add}" th:object="${betOffer}" method="post" cssClass="jumbotron">
 
-        <select th:field="*{event}">
+        <select th:field="*{event}" cssClass="form-conrol">
             <option th:each="event : ${events}"
                     th:value="${event.id}"
                     th:text="|${event.teamA} vs ${event.teamB}|">User</option>
         </select>
 
-        <select th:field="*{betOfferType}">
+        <select th:field="*{betOfferType}" cssClass="form-conrol">
             <option th:each="type : ${betOfferTypes}"
                     th:value="${type.id}"
                     th:text="|${type.name}|">Bet offer type</option>
         </select>
 
-        <p><input th:field="*{odds}" placeholder="odds">odds</p>
+        <p><input th:field="*{odds}" placeholder="odds" cssClass="form-conrol">odds</p>
         <p th:if="${#fields.hasErrors('odds')}" th:errors="*{odds}">Incorrect odds</p>
 
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 
+
+
+<div class="container">
     <h1>All bet offers: </h1>
 
-    <table>
+    <table class="table table-bordered">
         <th>
         <td>Type</td>
         <td>Odds</td>
@@ -64,6 +59,7 @@
         </tr>
 
     </table>
+</div>
 
 </section>
 </body>

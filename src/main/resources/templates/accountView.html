@@ -6,15 +6,7 @@
 <head>
     <title>User account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
@@ -26,66 +18,6 @@
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <div><input type="submit" value="Sign In"/></div>
     </form>
-
-
-    <h2>List of events:</h2>
-
-
-
-
-
-    <h2>List of offers:</h2>
-
-
-
-    <!--<table>-->
-        <!--<th>-->
-        <!--<td>Id</td>-->
-        <!--<td>Match</td>-->
-        <!--<td>Date</td>-->
-        <!--<td>Odds</td>-->
-        <!--<td>ProjectId</td>-->
-        <!--<td>Users</td>-->
-        <!--<td>Active status</td>-->
-        <!--<td>Tasks</td>-->
-        <!--<td>Edit</td>-->
-        <!--<td>Delete</td>-->
-        <!--</th>-->
-        <!--<tr th:each="betOffer : ${betOffers}">-->
-            <!--<td th:text="${betOffer.id}"/>-->
-            <!--<td th:text="|${betOffer.event.teamA} vs ${betOffer.event.teamB}|"/>-->
-            <!--<td th:text="${betOffer.event.start}"/>-->
-            <!--<td th:text="${betOffer.odds}"/>-->
-            <!--<td th:text="${betOffer.odds}"/>-->
-
-
-
-            <!--<td>-->
-                <!--<ul>-->
-                    <!--<li th:each="user : ${project.users}">-->
-                        <!--<p th:text="|User no: ${user.id}; Lastname: ${user.lastName}|"></p>-->
-                        <!--<a th:href="@{'/task/edit/'+${user.id}}">edit user</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</td>-->
-            <!--<td th:text="${project.activeStatus}"/>-->
-            <!--<td>-->
-                <!--<ul>-->
-                    <!--<li th:each="task : ${project.tasks}">-->
-                        <!--<p th:text="|Task no: ${task.id}; Topic: ${task.topic}|"></p>-->
-                        <!--<a th:href="@{'/task/edit/'+${task.id}}">edit task</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</td>-->
-            <!--<td><a th:href="@{'/project/edit/'+${project.id}}">edit project</a></td>-->
-            <!--<td><a th:href="@{'/project/delete/'+${project.id}}">delete project</a></td>-->
-
-
-        <!--</tr>-->
-
-    <!--</table>-->
-
-    <h2>List of your bets:</h2>
 
 </section>
 </body>

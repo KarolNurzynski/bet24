@@ -5,50 +5,42 @@
 <head>
     <title>Edit event </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
 
     <h1>Edit event: </h1>
 
-    <form th:action="@{'/event/edit/'+${event.id}}" th:object="${event}" method="post">
+    <form th:action="@{'/event/edit/'+${event.id}}" th:object="${event}" method="post" cssClass="jumbotron">
 
-        <p><input th:field="*{teamA}" placeholder="teamA">teamA</p>
+        <p><input th:field="*{teamA}" placeholder="teamA" cssClass="form-conrol">teamA</p>
         <p th:if="${#fields.hasErrors('teamA')}" th:errors="*{teamA}">Incorrect teamA</p>
 
-        <p><input th:field="*{teamB}" placeholder="teamB">teamB</p>
+        <p><input th:field="*{teamB}" placeholder="teamB" cssClass="form-conrol">teamB</p>
         <p th:if="${#fields.hasErrors('teamB')}" th:errors="*{teamB}">Incorrect teamB</p>
 
-        <p><input th:field="*{strengthA}" placeholder="strengthA">strengthA</p>
+        <p><input th:field="*{strengthA}" placeholder="strengthA" cssClass="form-conrol">strengthA</p>
         <p th:if="${#fields.hasErrors('strengthA')}" th:errors="*{strengthA}">Incorrect strengthA</p>
 
-        <p><input th:field="*{strengthB}" placeholder="strengthB">strengthB</p>
+        <p><input th:field="*{strengthB}" placeholder="strengthB" cssClass="form-conrol">strengthB</p>
         <p th:if="${#fields.hasErrors('strengthB')}" th:errors="*{strengthB}">Incorrect strengthB</p>
 
-        <p><input th:field="*{scoreA}" placeholder="scoreA">scoreA</p>
+        <p><input th:field="*{scoreA}" placeholder="scoreA" cssClass="form-conrol">scoreA</p>
         <p th:if="${#fields.hasErrors('scoreA')}" th:errors="*{scoreA}">Incorrect scoreA</p>
 
-        <p><input th:field="*{scoreB}" placeholder="scoreB">scoreB</p>
+        <p><input th:field="*{scoreB}" placeholder="scoreB" cssClass="form-conrol">scoreB</p>
         <p th:if="${#fields.hasErrors('scoreB')}" th:errors="*{scoreB}">Incorrect scoreB</p>
 
-        <p><input type='datetime' th:field="*{startDate}" placeholder="mm/dd/yy hh:mm PM">startDate(np. 6/23/18 5:54 PM)</p>
+        <p><input type='datetime' th:field="*{startDate}" placeholder="mm/dd/yy hh:mm PM" cssClass="form-conrol">startDate(np. 6/23/18 5:54 PM)</p>
         <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect startDate</p>
 
-        <p><input th:field="*{timeLeft}" placeholder="hh:mm AM">timeLeft(np. 1:20 AM)</p>
+        <p><input th:field="*{timeLeft}" placeholder="hh:mm AM" cssClass="form-conrol">timeLeft(np. 1:20 AM)</p>
         <p th:if="${#fields.hasErrors('timeLeft')}" th:errors="*{timeLeft}">Incorrect timeLeft</p>
 
         <input type="hidden" th:field="*{id}" />
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 

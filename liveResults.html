@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function(){
+			function fetchMatches() {
+
+				$.get("/api/events/live/", function(data) {
+
+					var arr = data;
+					let placeForScores =  document.querySelector( "#liveResults tbody" );
+					placeForScores.innerHTML = '';
+					for (var i = 0; i < arr.length; i++){
+
+						let newTr = document.createElement('tr');
+
+						let tdLp = document.createElement('td');
+						let tdTeamA = document.createElement('td');
+						let tdTeamB = document.createElement('td');
+						let tdTeamScoreA = document.createElement('td');
+						let tdTeamScoreB = document.createElement('td');
+
+						tdLp.innerText = i+1;
+						tdTeamA.innerText = arr[i]['team1'];
+						tdTeamB.innerText = arr[i]['team2'];
+						tdTeamScoreA.innerText = arr[i]['point1'];
+						tdTeamScoreB.innerText = arr[i]['point2'];
+
+
+						newTr.append(tdLp);
+						newTr.append(tdTeamA);
+						newTr.append(tdTeamB);
+						newTr.append(tdTeamScoreA);
+						newTr.append(tdTeamScoreB);
+
+						placeForScores.append(newTr);
+					}
+
+				   ;
+
+
+				})
+			}
+
+			setInterval(fetchMatches, 1000);
+
+        });
+
+        // function fetchMatches() {
+        //
+        //     $.get("/api/events/live/", function(data) {
+        //
+        //         var arr = data;
+        //         var str = "<table><th><td>Team A</td><td>Team B</td><td>Score A</td><td>Score B</td></th>";
+        //
+        //         for (var i = 0; i < arr.length; i++){
+        //             str += ("<tr><td>" + (i+1) + "</td>");
+        //             var obj = arr[i];
+        //             for (var key in obj){
+        //                 var value = obj[key];
+        //                 str += ("<td>" + value + "</td>");
+        //             }
+        //             str += "</tr>";
+        //         }
+        //
+        //         str += "</table>";
+        //
+        //         $( "#liveResults" ).html("<p>"  + str  + "</p>");
+        //     })
+        // }
+        //
+        // setInterval(fetchMatches, 1000);
+	</script>
+
+<body>
+
+	<h1>Live results (using AJAX): </h1>
+
+	<!--<div id="liveResults"></div>-->
+
+
+	<table id="liveResults" class="table table-bordered">
+		<thead>
+		<tr>
+			<th>Lp</th>
+			<th>Team A</th>
+			<th>Team B</th>
+			<th>Score A</th>
+			<th>Score B</th>
+		</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+
+</body>
+</html>

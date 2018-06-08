@@ -6,59 +6,32 @@
 <head>
     <title>Show events: </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
 
-    <!--<p><a th:href="@{'/account/edit/'+${betOffer.id}}">bet</a></p>-->
-
-    <!--<h1>All bet offers: </h1>-->
-
-    <!--<table>-->
-        <!--<th>-->
-        <!--<td>Type</td>-->
-        <!--<td>Odds</td>-->
-        <!--<td>Place bet</td>-->
-
-        <!--</th>-->
-        <!--<tr th:each="betOffer : ${betOffers}">-->
-            <!--<td th:text="${betOffer.id}"/>-->
-            <!--<td th:text="${betOffer.betOfferType.name}"/>-->
-            <!--<td th:text="${betOffer.odds}"/>-->
-            <!--<td><a th:href="@{'/bet/add/'+${betOffer.id}}">bet</a></td>-->
-        <!--</tr>-->
-
-    <!--</table>-->
-
     <h1>Add funds: </h1>
 
-    <form th:action="@{/operation/add}" th:object="${operation}" method="post">
+    <form th:action="@{/operation/add}" th:object="${operation}" method="post" cssClass="jumbotron">
 
-        <p><input th:field="*{value}" placeholder="value">value</p>
+        <p><input th:field="*{value}" placeholder="value" cssClass="form-conrol">value</p>
         <p th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Incorrect value</p>
 
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 
+<div class="container">
     <h1>All operations: </h1>
 
-    <table>
+    <table class="table table-bordered">
         <th>
-            <td>Description</td>
-            <td>Value</td>
-            <td>Made by (account number)</td>
-            <td>Date</td>
+        <td>Description</td>
+        <td>Value</td>
+        <td>Made by (account number)</td>
+        <td>Date</td>
         </th>
         <tr th:each ="operation, iter : ${userOperations}">
             <td th:text="${iter.count}"/>
@@ -74,6 +47,7 @@
         </tr>
 
     </table>
+</div>
 
 </section>
 </body>

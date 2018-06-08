@@ -5,29 +5,21 @@
 <head>
     <title>Show betOfferTypes: </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
 
     <h1>Edit bet offer type: </h1>
 
-    <form th:action="@{'/betOfferType/edit/'+${betOfferType.id}}" th:object="${betOfferType}" method="post">
+    <form th:action="@{'/betOfferType/edit/'+${betOfferType.id}}" th:object="${betOfferType}" method="post" cssClass="jumbotron">
 
-        <p><input th:field="*{name}" placeholder="name">name</p>
+        <p><input th:field="*{name}" placeholder="name" cssClass="form-conrol">name</p>
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
 
         <input type="hidden" th:field="*{id}" />
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 

@@ -6,22 +6,11 @@
 <head>
     <title>Bet24 - home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
-
-    <script type="text/javascript">
-
+    <script>
         setTimeout(function(){
             window.location.reload(1);
         }, 5000);
-
     </script>
 
 </head>
@@ -29,7 +18,7 @@
 
 <section layout:fragment="content">
 
-    <h1>Welcome on Bet24</h1>
+    <h1>#Welcome on Bet24</h1>
 
 
 
@@ -40,28 +29,28 @@
 
         <h2>Log in:</h2>
 
-        <form th:action="@{/home}" th:object="${user}" method="post">
+        <form th:action="@{/home}" th:object="${user}" method="post" cssClass="jumbotron">
 
-            <p><input th:field="*{username}" placeholder="username">username</p>
+            <p><input th:field="*{username}" placeholder="username" cssClass="form-conrol">username</p>
             <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect username</p>
 
-            <p><input th:field="*{password}" placeholder="password">password</p>
+            <p><input th:field="*{password}" placeholder="password" cssClass="form-conrol">password</p>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</p>
 
-            <span th:if="${loginError==1}">Incorrect email of password</span>
+            <p><span th:if="${loginError==1}">Incorrect email of password</span></p>
 
-            <p><input type="submit" value="submit"></p>
+            <p><input type="submit" value="submit" class="btn btn-success"></p>
 
         </form>
 
-        <a href="/user/add">Register here</a>
+        <p><a th:href="@{'/user/add'}">Register here</a></p>
 
         <p>------------------------------------------------</p>
 
     </div>
 
 
-    <div>
+    <div class="container">
         <h2>List of active events:</h2>
 
         <div th:if="${ #lists.isEmpty(events)}">
@@ -69,9 +58,9 @@
         </div>
 
 
-        <div th:if="${not #lists.isEmpty(events)}">
+        <div th:if="${not #lists.isEmpty(events)}" class="container">
 
-            <table>
+            <table class="table table-bordered">
                 <tr>
                 <th>Game id</th>
                 <th>Team A</th>
@@ -95,7 +84,7 @@
 
         </div>
 
-        <p><a th:href="@{'/admin/live'}">See live results (by js)</a></p>
+        <p><a th:href="@{'/admin/live'}">See live results (AJAX) + javascript</a></p>
 
         <p>------------------------------------------------</p>
 
@@ -103,7 +92,7 @@
 
 
 
-    <div>
+    <div class="container">
 
         <h2>List of offers:</h2>
 
@@ -111,9 +100,9 @@
             <p>No offers available..</p>
         </div>
 
-        <div th:if="${not #lists.isEmpty(betOffers)}">
+        <div th:if="${not #lists.isEmpty(betOffers)}" class="container">
 
-            <table th:each="event : ${events}">
+            <table th:each="event : ${events}" class="table table-bordered">
 
                 <tr>
                     <th colspan="6" th:text="|Game no ${event.id} : ${event.teamA} vs ${event.teamB}|"></th>
@@ -158,7 +147,7 @@
     </div>
 
 
-    <div th:if="${session.user_id != null}">
+    <div th:if="${session.user_id != null}" class="container">
 
         <h2>Your cart:</h2>
 
@@ -166,8 +155,8 @@
             <p>Cart is empty</p>
         </div>
 
-        <div th:if="${not #lists.isEmpty(session.cartOfBets)}">
-            <table >
+        <div th:if="${not #lists.isEmpty(session.cartOfBets)}" class="container">
+            <table class="table table-bordered">
                 <tr>
                 <th>Game id</th>
                 <th>Game</th>
@@ -195,7 +184,7 @@
 
     </div>
 
-    <div th:if="${session.user_id != null}">
+    <div th:if="${session.user_id != null}" class="container">
 
         <h2>Your active bets:</h2>
 
@@ -203,8 +192,8 @@
             <p>No active bets</p>
         </div>
 
-        <div th:if="${not #lists.isEmpty(activeUserBets)}">
-            <table >
+        <div th:if="${not #lists.isEmpty(activeUserBets)}" class="container">
+            <table class="table table-bordered">
                 <tr>
                 <th>Bet id</th>
                 <th>Game id</th>

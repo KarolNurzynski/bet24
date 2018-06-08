@@ -9,12 +9,12 @@
 <body>
 <section layout:fragment="content">
 
-    <form th:action="@{/account/add}" th:object="${account}" method="post">
+    <form th:action="@{/account/add}" th:object="${account}" method="post" cssClass="jumbotron">
 
-        <p><input th:field="*{accountNumber}" placeholder="accountNumber">accountNumber</p>
+        <p><input th:field="*{accountNumber}" placeholder="accountNumber" cssClass="form-conrol">accountNumber</p>
         <p th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}">Incorrect accountNumber</p>
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 

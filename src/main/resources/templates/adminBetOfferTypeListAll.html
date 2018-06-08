@@ -5,31 +5,24 @@
 <head>
     <title>New bet offer type</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
 
-    <form th:action="@{/betOfferType/add}" th:object="${betOfferType}" method="post">
+    <form th:action="@{/betOfferType/add}" th:object="${betOfferType}" method="post" cssClass="jumbotron">
 
-        <p><input th:field="*{name}" placeholder="name">name</p>
+        <p><input th:field="*{name}" placeholder="name" cssClass="form-conrol">name</p>
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
 
-        <p><input type="submit" value="submit"></p>
+        <p><input type="submit" value="submit" class="btn btn-success"></p>
 
     </form>
 
+<div class="container">
     <h1>All betOfferTypes: </h1>
 
-    <table>
+    <table class="table table-bordered">
         <th>
         <td>Name</td>
         <td>Edit</td>
@@ -44,6 +37,7 @@
         </tr>
 
     </table>
+</div>
 
 </section>
 </body>
