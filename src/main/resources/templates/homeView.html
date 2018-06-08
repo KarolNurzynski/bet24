@@ -110,7 +110,7 @@
                 </tr>
 
                 <tr>
-                    <th>Game id</th>
+                    <th>Bet offer id</th>
                     <th>Game</th>
                     <th>Type</th>
                     <th>Strength A</th>
@@ -123,9 +123,9 @@
                 <tr th:each="betOffer : ${event.betOffers}">
                     <td th:text="${betOffer.id}"/>
                     <td th:text="|${betOffer.event.teamA} (${betOffer.event.scoreA}) : ${betOffer.event.teamB} (${betOffer.event.scoreB})|"/>
+                    <td th:text="${betOffer.betOfferType.name}"/>
                     <td th:text="${betOffer.event.strengthA}"/>
                     <td th:text="${betOffer.event.strengthB}"/>
-                    <td th:text="${betOffer.betOfferType.name}"/>
                     <td th:text="${betOffer.odds}"/>
                     <td th:if="${session.user_id != null}"><a th:href="@{'/bet/add/'+${betOffer.id}}">add to cart</a></td>
                 </tr>
